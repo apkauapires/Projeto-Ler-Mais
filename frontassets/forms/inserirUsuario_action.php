@@ -26,13 +26,32 @@ if(!$usuarioDao->findByEmail($email)){
         $usuarioDao->insert($u);
         $_SESSION['message'] = "Usuario cadastrado com SUCESSO!";
         header("Location: form_inserirUsuario.php");
+        $_SESSION['nome'] = "";
+        $_SESSION['email'] = "";
+        $_SESSION['contato'] = "";
+        $_SESSION['senha'] = "";
+        $_SESSION['senhaRepeticao'] = "";
+        exit;
     }else{
         $_SESSION['message'] = "As senhas NÃO conferem!";
+        $_SESSION['nome'] = $nome;
+        $_SESSION['email'] = $email;
+        $_SESSION['contato'] = $contato;
+        $_SESSION['senha'] = "";
+        $_SESSION['senhaRepeticao'] = "";
         header("Location: form_inserirUsuario.php");
+        exit;
+        
     }
 }else{
     $_SESSION['message'] = "E-mail já cadastrado!";
+    $_SESSION['nome'] = $nome;
+    $_SESSION['email'] = "";
+    $_SESSION['contato'] = $contato;
+    $_SESSION['senha'] = $senha;
+    $_SESSION['senhaRepeticao'] = $senhaRepeticao;
     header("Location: form_inserirUsuario.php");
+    exit;
 }
 
 
