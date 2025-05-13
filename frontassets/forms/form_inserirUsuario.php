@@ -26,12 +26,12 @@ session_start();
     <?php 
         if (isset($_SESSION['message'])) {
             $mensagem = $_SESSION['message'];
-            $mensagemLower = strtolower($mensagem); // Facilita comparação
+            $mensagemLower = strtolower($mensagem); 
             $messageType = (strpos($mensagemLower, 'e-mail já cadastrado') !== false || strpos($mensagemLower, 'as senhas não conferem') !== false) 
                 ? 'error' 
                 : 'success';
             echo "<p class='$messageType'>{$mensagem}</p>";
-            $_SESSION['message'] = null; // Limpa a mensagem após exibir
+            $_SESSION['message'] = null;
         }
     ?>
     
@@ -53,6 +53,9 @@ session_start();
 
         <input type="submit" value="Cadastrar">
     </form>
+
+        
+        <p>Já tem uma conta? <a href="form_loginUsuario.php">Login</a></p>
 
 </body>
 </html>
