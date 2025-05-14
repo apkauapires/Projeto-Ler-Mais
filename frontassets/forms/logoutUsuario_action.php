@@ -11,7 +11,7 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-header("Location: frontassets/forms/form_loginUsuario.php");
+header('Location: /projeto-ler-mais/frontassets/forms/form_loginUsuario.php');
 exit;
 
 ?>

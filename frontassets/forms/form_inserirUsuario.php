@@ -36,8 +36,10 @@ session_start();
     ?>
     
     <form action="inserirUsuario_action.php" method="POST">
-        <label for="nome">Nome de usuário:</label>
+        <label for="nome">Nome:</label>
         <input type="text" id="nome_usuario" name="nome_usuario" value="<?= $_SESSION['nome'] ?? '' ?>" required><br><br>
+        <label for="nome">Sobrenome:</label>
+        <input type="text" id="sobrenome_usuario" name="sobrenome_usuario" value="<?= $_SESSION['sobrenome'] ?? '' ?>" required><br><br>
 
         <label for="email">Email:</label>
         <input type="email" id="email_usuario" name="email_usuario" value="<?= $_SESSION['email'] ?? '' ?>" required><br><br>
