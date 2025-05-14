@@ -1,63 +1,70 @@
-<?php 
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Formulário de Cadastro</title>
-    <style>
-        .success {
-            color: green;
-            font-weight: bold;
-        }
-
-        .error {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro - Ler Mais</title>
+  <link rel="stylesheet" href="../css/style-cadastroUsuario.css">
 </head>
 <body>
+  <div class="container">
+    <div class="form-container">
+      <img src="../img/logo.jpg" alt="Logo Ler Mais" class="logo">
+      <h1>Ler Mais</h1>
 
-    <h2>Cadastro de Usuário</h2>
+      <p class ="error-message">Erro</p>
 
-    <?php 
-        if (isset($_SESSION['message'])) {
-            $mensagem = $_SESSION['message'];
-            $mensagemLower = strtolower($mensagem); 
-            $messageType = (strpos($mensagemLower, 'e-mail já cadastrado') !== false || strpos($mensagemLower, 'as senhas não conferem') !== false) 
-                ? 'error' 
-                : 'success';
-            echo "<p class='$messageType'>{$mensagem}</p>";
-            $_SESSION['message'] = null;
-        }
-    ?>
-    
-    <form action="inserirUsuario_action.php" method="POST">
+      <form action="inserirUsuario_action.php" method="post">
         <label for="nome">Nome:</label>
-        <input type="text" id="nome_usuario" name="nome_usuario" value="<?= $_SESSION['nome'] ?? '' ?>" required><br><br>
-        <label for="nome">Sobrenome:</label>
-        <input type="text" id="sobrenome_usuario" name="sobrenome_usuario" value="<?= $_SESSION['sobrenome'] ?? '' ?>" required><br><br>
+        <input type="text" id="nome_usuario" name="nome_usuario" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email_usuario" name="email_usuario" value="<?= $_SESSION['email'] ?? '' ?>" required><br><br>
+        <label for="sobrenome">Sobrenome:</label>
+        <input type="text" id="sobrenome_usuario" name="sobrenome_usuario" required>
 
-        <label for="contato">Contato:</label>
-        <input type="text" id="contato_usuario" name="contato_usuario" value="<?= $_SESSION['contato'] ?? '' ?>" required><br><br>
+      <label for="telefone">Contato</label>
+<input type="tel" id="contato_usuario"maxlength="15" name="contato_usuario" placeholder="(99) 99999-9999" required>
+ <script>
+    const telefoneInput = document.getElementById('contato_usuario');
+
+    telefoneInput.addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, ""); 
+
+      if (value.length > 15) value = value.slice(0, 15); 
+      if (value.length > 0) {
+        value = "(" + value;
+      }
+      if (value.length > 3) {
+        value = value.slice(0, 3) + ") " + value.slice(3);
+      }
+      if (value.length > 10) {
+        value = value.slice(0, 10) + "-" + value.slice(10);
+      }
+
+      e.target.value = value;
+    });
+  </script>
+
+
+
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email_usuario" name="email_usuario" required>
 
         <label for="senha">Senha:</label>
-        <input type="password" id="senha_usuario" name="senha_usuario" value="<?= $_SESSION['senha'] ?? '' ?>" required><br><br>
+        <input type="password" id="senha_usuario" name="senha_usuario" required>
 
-        <label for="repetir_senha">Repetir Senha:</label>
-        <input type="password" id="repetir_senha" name="repetir_senha" value="<?= $_SESSION['senhaRepeticao'] ?? '' ?>" required><br><br>
+        <label for="confirmar">Confirmar Senha:</label>
+        <input type="password" id="repetir_senha" name="repetir_senha" required>
 
-        <input type="submit" value="Cadastrar">
-    </form>
+        <button type="submit">Cadastrar-se</button>
+      </form>
 
-        
-        <p>Já tem uma conta? <a href="form_loginUsuario.php">Login</a></p>
+      <p class="login-link">Já tem uma conta? <a href="#">Faça login</a></p>
+    </div>
 
+    <div class="image-container">
+      <div class="overlay"></div>
+    </div>
+  </div>
 </body>
 </html>
