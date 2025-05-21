@@ -24,18 +24,14 @@ class Livro{
         }
         public function getCategoria():string{
             return $this->categoriaString;
-        }
-        
+        }    
     }
-    
     $t = new Livro(
         "adsad",
         "adsaa",
         2,
         3,
     );
-
     $test = $t->getCategoria();
-    
     echo $test;
 ?>
