@@ -1,0 +1,131 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.form-container {
+  width: 50%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #fff;
+}
+
+.logo {
+  width: 80px;
+  margin-bottom: 30px;
+}
+
+h1 {
+  color: #0047ab;
+  margin-bottom: 30px;
+}
+
+form {
+  width: 100%;
+  max-width: 350px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0047ab;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #003b94;
+}
+
+.login-link {
+  margin-top: 20px;
+}
+
+.login-link a {
+  color: #0047ab;
+  text-decoration: none;
+}
+
+.error-message{
+    background-color: crimson;
+    width: 30px;
+    height: 5px;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.form-container {
+  width: 50%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #fff;
+}
+
+.image-container {
+  width: 50%;
+  height: 100vh;
+background-image: url("../frontassets/img/livros.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+clip-path: ellipse(70% 100% at 93% 50%);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 33, 89, 0.7);
+clip-path: ellipse(70% 100% at 93% 50%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
