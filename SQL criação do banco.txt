@@ -22,7 +22,7 @@ CREATE TABLE Livro (
     FOREIGN KEY (fk_id_categoria) REFERENCES Categoria(id_categoria),
 	FOREIGN KEY (fk_id_subcategoria) REFERENCES Categoria(id_categoria)
 );
-
+ALTER TABLE `livro` ADD `descricao` LONGTEXT NOT NULL ;
 -- 3. Usuario
 CREATE TABLE Usuario (
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
