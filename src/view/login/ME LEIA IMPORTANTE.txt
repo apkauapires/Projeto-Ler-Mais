@@ -1,0 +1,1 @@
+aqui dentro dessa pasta vão os arquivos da tela login e cadastro de login do usuário, que no caso são só os arquivos .php do front
