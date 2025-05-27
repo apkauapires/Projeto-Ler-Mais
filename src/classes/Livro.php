@@ -24,7 +24,18 @@ class Livro{
         }
         public function getCategoria():string{
             return $this->categoriaString;
-        }    
+        }  
+        public function getQuantidade():int{
+            return $this->quantidade;
+        }   
+        public function getNome():string{
+            return $this->nome;
+        }
+        public function getAutor():string{
+            return $this->autor;
+        }
+
+
     }
    /* $t = new Livro(
         "adsad",

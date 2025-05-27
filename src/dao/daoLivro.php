@@ -4,11 +4,11 @@
     class DaoLivro {
         private $conexao;
 
-        public function __construct($conexao) {
+        public function __construct(mysqli $conexao) {
             $this->conexao = $conexao;
         }
-        public function listarLivros($ordem) {
-            $sql = "SELECT * FROM livro ORDER BY $ordem";
+        public function listarLivros() {
+            $sql = "SELECT * FROM categoria ORDER BY nome_categoria";
             $resultado = mysqli_query($this->conexao, $sql);
             $livros = [];
             while ($livro = mysqli_fetch_assoc($resultado)) {
@@ -17,13 +17,14 @@
             return $livros;
         }       
         public function buscarLivro($id) {
-            $sql = "SELECT * FROM livro WHERE id = ?";
-            $stmt = mysqli_prepare($this->conexao, $sql);
-            mysqli_stmt_bind_param($stmt, "i", $id);
-            mysqli_stmt_execute($stmt);
-            $resultado = mysqli_stmt_get_result($stmt);
-            $livro = mysqli_fetch_assoc($resultado);
-            mysqli_stmt_close($stmt);
+            $livro=[];
+            $sql = "SELECT * FROM categoria WHERE id_categoria = ?";
+            $stmt = $this->conexao->prepare($sql);
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+            $livro[] = mysqli_fetch_assoc($resultado);
+            $stmt->close();
             return $livro;
         }
     }
