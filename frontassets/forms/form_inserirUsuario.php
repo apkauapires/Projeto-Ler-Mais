@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -9,19 +12,28 @@
 <body>
   <div class="container">
     <div class="form-container">
-      <img src="../img/logo.jpg" alt="Logo Ler Mais" class="logo">
-      <h1>Ler Mais</h1>
 
-      <p class ="error-message">Erro</p>
+      <div class="logo-titulo">
+  <img src="../img/logo.jpg" alt="Logo Ler Mais" class="logo">
+  <h1>Ler Mais</h1>
 
+</div>
+   <?php
+        if (isset($_SESSION['message']) && $_SESSION['message'] != '') {
+          echo $_SESSION['message'];
+          $_SESSION['message'] = "";
+
+        }
+      ?>
+    
       <form action="inserirUsuario_action.php" method="post">
-        <label for="nome">Nome:</label>
+        <label for="nome"><b>Nome:</b></label>
         <input type="text" id="nome_usuario" name="nome_usuario" required>
 
-        <label for="sobrenome">Sobrenome:</label>
+        <label for="sobrenome"><b>Sobrenome:</b></label>
         <input type="text" id="sobrenome_usuario" name="sobrenome_usuario" required>
 
-      <label for="telefone">Contato</label>
+      <label for="telefone"><b>Contato</b></label>
 <input type="tel" id="contato_usuario"maxlength="15" name="contato_usuario" placeholder="(99) 99999-9999" required>
  <script>
     const telefoneInput = document.getElementById('contato_usuario');
@@ -47,19 +59,19 @@
 
 
 
-        <label for="email">E-mail:</label>
+        <label for="email"><b>E-mail:</b></label>
         <input type="email" id="email_usuario" name="email_usuario" required>
 
-        <label for="senha">Senha:</label>
+        <label for="senha"><b>Senha:</b></label>
         <input type="password" id="senha_usuario" name="senha_usuario" required>
 
-        <label for="confirmar">Confirmar Senha:</label>
+        <label for="confirmar"><b>Confirmar Senha:</b></label>
         <input type="password" id="repetir_senha" name="repetir_senha" required>
 
         <button type="submit">Cadastrar-se</button>
       </form>
 
-      <p class="login-link">Já tem uma conta? <a href="#">Faça login</a></p>
+      <p class="login-link">Já tem uma conta? <a href="form_loginUsuario.php">Faça login</a></p>
     </div>
 
     <div class="image-container">
