@@ -2,7 +2,7 @@
     require __DIR__ .  "/../../src/dao/daoLivro.php";
 
     $l = new daoLivro($conexao);
-    $livros = $l->buscarLivro(1);
+    $livros = $l->listarLivros();
 
 ?>
 <!DOCTYPE html>
@@ -19,11 +19,13 @@
         foreach ($livros as $livro){
 
     ?>
-      <!-- <img src="<?php // echo $livro['img_livro'] ?>"> -->
-        <p> <?php echo $livro['nome_categoria']?></p>
+        <form  action="LivroAluguel.php" method="post">
+      <!--<img src="<?php // echo $livro['img_livro'] ?>"> -->
+            <p> <?php echo $livro['nome_categoria']?></p>
         <!--<p> <?php //echo $livro['estoque_livro']?></p>-->
        <!-- <p> <?php //echo $livro['nome_livro']?></p>-->
-        <button value="<?php echo $livro['id_categoria'];?>">Alugar</button>
+            <button value="<?php echo $livro['id_categoria'];?>">Alugar</button>
+        </form>
     <?php
     }
         require __DIR__ . "/../view/layout/footer.php";
