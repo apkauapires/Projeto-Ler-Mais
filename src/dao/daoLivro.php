@@ -7,6 +7,19 @@
         public function __construct(mysqli $conexao) {
             $this->conexao = $conexao;
         }
+
+        public function insert(Livro $l){
+        $nome = $l->getNome();
+        $autor = $l->getAutor();
+        $categoria = $l->getCategoria();
+        $quantidade = $l->getQuantidade();
+
+        $stmt = $this->conexao->prepare("INSERT into livro(nome_livro, autor_livro, estoque_livro, fk_id_categoria) values (?, ?, ?, ?)");
+        $stmt->bind_param('ssii', $nome, $autor, $quantidade, $categoria);
+        $stmt->execute(); 
+        $stmt->close();
+        }
+
         public function listarLivros() {
             $sql = "SELECT * FROM categoria ORDER BY nome_categoria";
             $resultado = mysqli_query($this->conexao, $sql);
