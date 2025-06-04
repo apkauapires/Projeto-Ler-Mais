@@ -22,8 +22,8 @@ class Livro{
             }
             return $categoria;
         }
-        public function getCategoria():string{
-            return $this->categoriaString;
+        public function getCategoria():int{
+            return $this->categoriaNum;
         }  
         public function getQuantidade():int{
             return $this->quantidade;
