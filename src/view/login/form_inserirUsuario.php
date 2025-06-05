@@ -7,14 +7,14 @@ session_start();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro - Ler Mais</title>
-  <link rel="stylesheet" href="../css/style-cadastroUsuario.css">
+  <link rel="stylesheet" href="../../components/style-loginUsuario.css">
 </head>
 <body>
   <div class="container">
     <div class="form-container">
 
       <div class="logo-titulo">
-  <img src="../img/logo.jpg" alt="Logo Ler Mais" class="logo">
+  <img src="../../public/image/logo.jpg" alt="Logo Ler Mais" class="logo">
   <h1>Ler Mais</h1>
 
 </div>
@@ -26,7 +26,7 @@ session_start();
         }
       ?>
     
-      <form action="inserirUsuario_action.php" method="post">
+      <form action="../../controllers/inserirUsuario.php" method="post">
         <label for="nome"><b>Nome:</b></label>
         <input type="text" id="nome_usuario" name="nome_usuario" required>
 

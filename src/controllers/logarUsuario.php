@@ -2,11 +2,11 @@
 
 session_start();
 
-require __DIR__ . "/../../classes/Usuario.php";
-require __DIR__ . "/../../dao/UsuarioDaoMysql.php";
+require __DIR__ . "../../classes/Usuario.php";
+require_once __DIR__ . "../../dao/daoUsuario.php";
 require __DIR__ . "/../../config.php";
 
-$usuarioDao = new UsuarioDaoMysql($conexao);
+$usuarioDao = new daoUsuario($conexao);
 
 $email = $_POST['email_usuario'];
 $senha = $_POST['senha_usuario'];

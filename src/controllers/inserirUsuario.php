@@ -2,11 +2,11 @@
 
 session_start();
 
-require __DIR__ . "/../../classes/Usuario.php";
-require __DIR__ . "/../../dao/UsuarioDaoMysql.php";
+require __DIR__ . "../../classes/Usuario.php";
+require_once __DIR__ . "../../dao/daoUsuario.php";
 require __DIR__ . "/../../config.php";
 
-$usuarioDao = new UsuarioDaoMysql($conexao);
+$usuarioDao = new daoUsuario($conexao);
 
 
 
@@ -26,7 +26,7 @@ if(!$usuarioDao->findByEmail($email)){
         $u->setSenha($senha);
         $usuarioDao->insert($u);
         $_SESSION['message'] = "Usuario cadastrado com SUCESSO!";
-        header("Location: form_loginUsuario.php");
+        header("Location: ../view/login/form_loginUsuario.php");
         $_SESSION['nome'] = "";
         $_SESSION['email'] = "";
         $_SESSION['contato'] = "";
@@ -41,7 +41,7 @@ if(!$usuarioDao->findByEmail($email)){
         $_SESSION['contato'] = $contato;
         $_SESSION['senha'] = "";
         $_SESSION['senhaRepeticao'] = "";
-        header("Location: form_inserirUsuario.php");
+        header("Location: ../view/login/form_inserirUsuario.php");
         exit;
         
     }
@@ -52,7 +52,7 @@ if(!$usuarioDao->findByEmail($email)){
     $_SESSION['contato'] = $contato;
     $_SESSION['senha'] = $senha;
     $_SESSION['senhaRepeticao'] = $senhaRepeticao;
-    header("Location: form_inserirUsuario.php");
+    header("Location: ../view/login/form_inserirUsuario.php");
     exit;
 }
 

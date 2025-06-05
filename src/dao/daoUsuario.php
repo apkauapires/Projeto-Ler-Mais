@@ -1,7 +1,7 @@
 <?php
-require __DIR__ . '/../config.php';
+require __DIR__ . '/../../config.php';
 
-class UsuarioDaoMysql {
+class daoUsuario {
 
     private $conn;
 
