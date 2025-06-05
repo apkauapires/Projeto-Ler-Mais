@@ -4,7 +4,6 @@ session_start();
 
 require __DIR__ . "../../classes/Usuario.php";
 require_once __DIR__ . "../../dao/daoUsuario.php";
-require __DIR__ . "/../../config.php";
 
 $usuarioDao = new daoUsuario($conexao);
 
