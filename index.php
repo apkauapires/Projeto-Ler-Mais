@@ -4,14 +4,12 @@ session_start();
 if($_SESSION['usuario']===null){
     header("Location:src/view/login/form_loginUsuario.php");
     exit;
-}else{
-    echo 'Bem vindo '.$_SESSION['usuario'];
 }
-?>
 
-<br>
-<br>
-
-<a href="src/controllers/deslogarUsuario.php">Sair</a></p>
+if($_SESSION['usuario']==="admin sistema"){
+    header("Location:src/view/painel_adm/painel_adm.php");
+}else{
+    header("Location:src/view/inicial.php");
+}
 
 
