@@ -16,5 +16,5 @@
             $stmt->bind_param('iiss', $nome, $livros, $dataColeta, $dataDevolucao);
             $stmt->execute(); 
             $stmt->close();
-            }
+        }
     }

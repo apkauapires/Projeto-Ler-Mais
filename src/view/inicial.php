@@ -1,7 +1,11 @@
 <?php
+    session_start();
+    //unset($_SESSION['sacola']);
     require __DIR__ .  "/../../src/dao/daoLivro.php";
     $l = new daoLivro($conexao);
     $livros = $l->listarLivros();
+    $sacola = $_SESSION['sacola'] ?? [];
+    $qtdSacola = count($sacola);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,16 +18,30 @@
 <body>
     <?php
         require __DIR__ . "/../view/layout/header.php";      
+        if (!empty($sacola)) { 
+            echo "<h2>quantidade sacola $qtdSacola</h2>"; 
     ?>
-        <form  action="../controllers/alugarLivro.php" method="post">
-            <img src="teste" alt="teste">
-            <h1>Livro tal</h1>
-            <p>Quantidade:10</p>
-            <button value="4" name="id_livro">Alugar</button>
+        <ul>
+            <?php foreach ($sacola as $alugado){ ?>
+                <li>
+                    <?php echo $alugado['titulo'];?>
+                    <?php echo $alugado['src_img'];?>
+                    Quantidade: <?= $alugado['quantidade'] ?>;
+                </li>
+            <?php } ?>
+        </ul>
+    <?php 
+        }
+        foreach ($livros as $livro){
+    ?>
+        <form  action="../controllers/sacolaDeLivros.php" method="post">
+            <img src="<?php echo $livro['img_livro']; ?>" alt="teste"><input type="hidden" name='img' value="<?php echo $livro['img_livro']; ?>"><br>
+            <h1><?php echo $livro['nome_livro'];?></h1><input type="hidden" name="titulo" value="<?php echo $livro['nome_livro'];?>">
+            <p>Quantidade:<?php echo $livro['estoque_livro']; ?></p>
+            <button type="submit" name="id_livro" value="<?php echo $livro['id_livro'];?>">Alugar</button>
         </form>
-        
     <?php
-    
+    }
         require __DIR__ . "/../view/layout/footer.php";
     ?>
 

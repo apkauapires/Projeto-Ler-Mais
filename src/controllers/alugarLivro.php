@@ -1,10 +1,6 @@
 <?php
-    require_once __DIR__ . "/../dao/daoLivro.php";
-    $id_livro = $_POST['id_livro'];
-    $le = new daoLivro($conexao);
-    $alugado = $le->buscarLivro($id_livro);
-    var_dump($alugado[0]['id_categoria']) ;
-    require_once __DIR__ . "../../classes/LivroAluguel.php";
+    
+    /*require_once __DIR__ . "../../classes/LivroAluguel.php";
     require __DIR__ . "/../dao/daoLivroAlugel.php";
     $fk_id_usuario = $_SESSION['id_usuario'];
     $fk_id_livros[] = $alugado['id_livro'];
@@ -21,4 +17,4 @@
             $fk_id_livros
         );
         $daoAluguel->insert($aluguel);
-    }
+    }*/
