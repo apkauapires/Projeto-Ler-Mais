@@ -17,8 +17,18 @@
 </head>
 <body>
     <?php
-        require __DIR__ . "/../view/layout/header.php";      
-        if (!empty($sacola)) { 
+        require __DIR__ . "/../view/layout/header.php"; 
+        if(isset($_GET['verificacao']) && $_GET['verificacao']=== "sim") {
+    ?>    
+        <button type='button' onclick='location.href="inicial.php?verificacao=nao"'> sacola </button>
+    <?php 
+    }else{
+    ?>
+        <button type='button' onclick='location.href="inicial.php?verificacao=sim"'> sacola </button>
+    <?php     
+    }
+
+        if (!empty($sacola) && $_GET['verificacao'] === "sim") { 
             echo "<h2>quantidade sacola $qtdSacola</h2>"; 
     ?>
         <ul>
