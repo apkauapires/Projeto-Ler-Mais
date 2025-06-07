@@ -10,9 +10,12 @@
     <div class="admin-panel">
       <h1>Painel do Administrador</h1>
       <div class="botoes">
-        <a href="cadastro_categoria.html" class="botao">Cadastro de Categoria</a>
-        <a href="cadastro_livro.html" class="botao">Cadastro de Livro</a>
+        <a href="../categoria/form_categoria.php" class="botao">Cadastro de Categoria</a>
+        <a href="../livro/form_livro.php" class="botao">Cadastro de Livro</a>
         <a href="listagem_alugueis.html" class="botao">Listagem de Aluguéis</a>
+        <br><br>
+        <a href="../../controllers/deslogarUsuario.php" class="botaoSair">Sair</a>
+
       </div>
     </div>
   </div>

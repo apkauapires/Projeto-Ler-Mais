@@ -1,20 +1,23 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Inserir Categoria</title>
-    <link rel="stylesheet" href="style-cadastroCategoria.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Categoria</title>
+    <link rel="stylesheet" href="../../components/style-cadastroCategoria.css">
 </head>
 <body>
-    
-    <h1>Inserir Nova Categoria</h1>
-    <div class="insert-categoria>
-    <form action="../../controllers/insertCategoria.php" method="post">
-        <label for="nome">Nome da Categoria:</label>
-        <input type="text" id="nome_categoria" name="nome_categoria" required>
-        <br><br>
-        <input type="submit" value="Salvar">
+    <form action="../../controllers/insertCategoria.php" method="POST">
+        <div class="text-button">
+            <h1>Insira nova categoria</h1>
+            <label>Nome da categoria: 
+            </label><input placeholder="Categoria..."type="text" name = "nome_categoria" id = "nome_categoria" >
+            </label>
+            <br>
+            <br>
+            <button type="submit">Salvar</button>
+        </div>
     </form>
-    </div>
 </body>
 </html>
