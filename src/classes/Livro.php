@@ -6,7 +6,9 @@ class Livro{
             public readonly string $nome,
             public readonly string $autor,
             public readonly INT $categoriaNum,
-            private INT $quantidade
+            private INT $quantidade,
+            private string $capa,
+            private string $descricao
         ){
            $this->categoriaString = $this->verificarCategoria($categoriaNum);
         }
@@ -35,6 +37,21 @@ class Livro{
             return $this->autor;
         }
 
+        public function setDescricao($d){
+            $this->descricao = $d;
+        }
+
+        public function getDescricao(){
+            return $this->descricao;
+        }
+
+        public function setCapa($c){
+            $this->capa = $c;
+        }
+
+        public function getCapa(){
+            return $this->capa;
+        }
 
     }
    /* $t = new Livro(

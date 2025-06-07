@@ -7,12 +7,23 @@ $nome = $_POST['nome_livro'];
 $autor = $_POST['autor_livro'];
 $estoque = $_POST['estoque_livro'];
 $categoria = $_POST['fk_id_categoria'];
+$descricao = $_POST['descricao_livro'];
+
+$nomeImagem = $_FILES['capa_livro']['name'];
+$tmpImagem = $_FILES['capa_livro']['tmp_name'];
+$caminhoImagem = "../view/livro/capas/" . basename($nomeImagem);
+
+
+if (!$nome || !$autor || !$estoque || !$descricao || !$nomeImagem) {
+    header("Location: ../view/livro/form_livro.php");
+    exit;
+}
+
+move_uploaded_file($tmpImagem, $caminhoImagem);
+
+
+
+$livro = new Livro($nome, $autor, $categoria, $estoque, $descricao, $caminhoImagem);
 
 $livroDao = new daoLivro($conexao);
-
-if(!$nome && $autor && $estoque){
-    header("Location: ../view/categoria/form_livro.php");   
-}else{
-    $livro = new Livro($nome, $autor, $categoria, $estoque);
-    $livroDao->insert($livro);
-}
+$livroDao->insert($livro);

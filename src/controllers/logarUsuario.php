@@ -15,6 +15,7 @@ if($email && $senha){
     if($usuarioDao->findByEmail($email)){
         $u = $usuarioDao->findByEmail($email);
         if($u->getSenha()===$senha){
+            $_SESSION['id'] = $u->getId();
             $_SESSION['usuario'] = $u->getNome();
             header('Location:../../index.php');
             exit;

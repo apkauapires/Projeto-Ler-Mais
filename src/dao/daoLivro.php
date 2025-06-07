@@ -13,9 +13,11 @@
         $autor = $l->getAutor();
         $categoria = $l->getCategoria();
         $quantidade = $l->getQuantidade();
+        $descricao = $l->getDescricao();
+        $capa = $l->getCapa();
 
-        $stmt = $this->conexao->prepare("INSERT into livro(nome_livro, autor_livro, estoque_livro, fk_id_categoria) values (?, ?, ?, ?)");
-        $stmt->bind_param('ssii', $nome, $autor, $quantidade, $categoria);
+        $stmt = $this->conexao->prepare("INSERT into livro(nome_livro, autor_livro, estoque_livro, fk_id_categoria, descricao, capa_livro) values (?, ?, ?, ?,?, ?)");
+        $stmt->bind_param('ssiiss', $nome, $autor, $quantidade, $categoria,$descricao,$capa);
         $stmt->execute(); 
         $stmt->close();
         }
