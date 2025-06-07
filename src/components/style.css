@@ -1,0 +1,116 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url(./assets/imagem.navy\,opaca.png);
+}
+
+div {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 1.5rem;
+    background-color: #F8F8FF;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 90%;
+    max-width: 550px;
+    margin: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    width: 100%;
+}
+h1 {
+    font-size: 30px;
+    font-weight: bolder;
+    text-align: center;
+    letter-spacing: 1.5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 15px;
+}
+
+input[type="text"],
+.categoria_select,
+.estoque_livro,
+input[type="file"] {
+    width: 100%;
+    height: 1.6rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 10px;
+    background-color: #F8F8FF;
+    margin-bottom: 1.5rem; 
+    box-sizing: border-box; 
+}
+
+label {
+    align-self: flex-start;
+    font-size: large;
+    font-weight: bold;
+}
+
+input::placeholder {
+    font-style: italic;
+    color: #A9A9A9;
+}
+
+
+input[type="submit"] {
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+    height: 3.5rem;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+textarea {
+    width: 500px;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    outline: none;
+    background-color: #F8F8FF;
+    box-sizing: border-box;
+    resize: vertical;
+    padding-top: 0.6px;
+}
+
+input[type="file"] {
+    border: none;
+    padding: 0;
+}
+
+.estoque_livro {
+    align-self: flex-start;
+    width: 60%;
+
+}
+
+.file_img {
+    margin: 5px;
+}
