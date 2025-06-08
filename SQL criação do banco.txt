@@ -19,6 +19,7 @@ CREATE TABLE Livro (
     estoque_livro INT NOT NULL,
     fk_id_categoria INT NOT NULL,
 	fk_id_subcategoria INT NULL,
+    capa_livro VARCHAR(230) NOT NULL,
     FOREIGN KEY (fk_id_categoria) REFERENCES Categoria(id_categoria),
 	FOREIGN KEY (fk_id_subcategoria) REFERENCES Categoria(id_categoria)
 );
