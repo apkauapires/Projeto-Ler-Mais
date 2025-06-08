@@ -21,17 +21,17 @@ if($email && $senha){
             exit;
         }else{
             $_SESSION['message'] = 'E-mail ou senha inválidos!';
-            header('Location:form_LoginUsuario.php');
+            header('Location:../view/login/form_LoginUsuario.php');
             exit;
         }
     }else{
             $_SESSION['message'] = 'Email não encontrado!';
-            header('Location:form_LoginUsuario.php');
+            header('Location:../view/login/form_LoginUsuario.php');
             exit;
     }
 }else{
     $_SESSION['message'] = 'Informe os dados!';
-    header('Location:form_LoginUsuario.php');
+    header('../view/login/form_LoginUsuario.php');
     exit;
 }
 

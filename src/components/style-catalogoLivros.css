@@ -1,0 +1,217 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+header {
+  background-color: #09203F;
+  background-image:url(../public/image/livros.png.png);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  background-color: #09203F;
+}
+
+nav button {
+  padding: 15px 20px;
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+nav button:hover {
+  background-color: #537895;
+}
+
+section {
+  display: none;
+  padding: 30px;
+}
+
+section.active {
+  display: block;
+}
+
+.livros-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.livro-card {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.livro-card:hover {
+  transform: scale(1.02);
+}
+
+.livro-card h3 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+.livro-card p {
+  margin: 5px 0;
+  font-size: 0.95em;
+}
+
+.livro-card button {
+  margin-top: 10px;
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.livro-card button:hover {
+  background-color: #1f5d89;
+}
+
+form {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  margin-top: 20px;
+  width: 100%;
+  background-color: #09203F;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #09203F;
+}
+
+#busca {
+  margin-bottom: 20px;
+  max-width: 400px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+/* Botão flutuante do carrinho */
+#abrirCarrinho {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+  background-color: #2980b9; /* azul */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+/* Aba lateral do carrinho */
+#carrinhoLateral {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 280px;
+  height: 100%;
+  background-color: #f8f9fa;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+  padding: 20px;
+  overflow-y: auto;
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+#carrinhoLateral.aberto {
+  right: 0;
+}
+
+#carrinhoLateral h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+#carrinhoLateral ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#carrinhoLateral li {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Botão Finalizar com azul */
+#botaoFinalizar {
+  margin-top: 15px;
+  width: 100%;
+  background-color: #2980b9; /* azul */
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+#botaoFinalizar:hover {
+  background-color: #2471a3; /* tom mais escuro no hover */
+}
+
+/* Botão de remover (❌) com estilo azul */
+#carrinhoLateral li button {
+  background-color: #2980b9;
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#carrinhoLateral li button:hover {
+  background-color: #2471a3;
+}
+
