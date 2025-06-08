@@ -9,7 +9,7 @@ if($_SESSION['usuario']===null){
 if($_SESSION['usuario']==="admin sistema"){
     header("Location:src/view/painel_adm/painel_adm.php");
 }else{
-    header("Location:src/view/inicial.php");
+    header("Location:src/catalogoLivros.php");
 }
 
 
