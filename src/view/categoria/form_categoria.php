@@ -14,8 +14,6 @@
             <label>Nome da categoria: 
             </label><input placeholder="Categoria..."type="text" name = "nome_categoria" id = "nome_categoria" >
             </label>
-            <br>
-            <br>
             <button type="submit">Salvar</button>
         </div>
     </form>

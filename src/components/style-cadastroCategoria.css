@@ -17,14 +17,18 @@ body {
 }
 
 h1 {
-    color: black;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 1.3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 div {
     border: 2px solid black;
     background-color: #F8F8FF;
     padding: 2rem;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 input[type=text] {
@@ -40,29 +44,30 @@ input[type=text] {
 }
 
 label {
-    margin-left: 0.3rem;
-    margin-bottom: 0.3rem;
-    margin-top: 2rem;
+    font-size: large;
+    font-weight: 520;
+    margin-bottom: 3px;
+    margin-left: 5px;
     display: block;
+    margin: 40px 0px 3px 8px;
 }
 
 input::placeholder {
     font-size: 1rem;
     font-style: italic;
-    color: rgba(0, 0, 0, 0.363);
+    color: #484d50;
 }
 
 button {
     border: 2px solid black;
-    border-radius: 500px;
-    background-color: #F8F8FF;
+    border-radius: 30px;
+    background-color: transparent;
     color: black;
-    font-weight: 500;
     width: 100%;
     height: 4rem;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
+    font-weight: 520;
+    font-size: 19px;
+    margin: 20px 0 15px 0px;
 }
 
 button:hover {
