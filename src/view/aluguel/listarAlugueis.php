@@ -37,14 +37,9 @@
                     <td><?php echo $a['nome_usuario']; ?></td>
                     <td><?php echo $a['data_coleta']; ?></td>
                     <td>
-    <a 
-        href="../../controllers/baixarAluguel.php?id_aluguel=<?= $a['id_aluguel'] ?>" 
-        class="baixarAlu"
-        onclick="return confirm('Tem certeza que deseja baixar este aluguel?');"
-    >
-        Baixar
-    </a>
-</td>
+                         <a href="../../controllers/baixarAluguel.php?id_aluguel=<?= $a['id_aluguel'] ?>" 
+                          class="baixarAlu" onclick="return confirm('Tem certeza que deseja baixar este aluguel?');">Dar baixa</a>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
