@@ -11,10 +11,62 @@
             $dataColeta = $la->getDataColeta();
             $dataDevolucao = $la->getDataDevolucao();
 
-            $stmt = $this->conexao->prepare("INSERT into alugel(fk_id_usuario, fk_id_livro, data_coleta, dias_alugel)
+            $stmt = $this->conexao->prepare("INSERT into aluguel(fk_id_usuario, fk_id_livro, data_coleta, dias_alugel)
             values (?, ?, ?, ?)");
             $stmt->bind_param('iiss', $nome, $livros, $dataColeta, $dataDevolucao);
             $stmt->execute(); 
             $stmt->close();
         }
+
+        public function listAlugueis() {
+        $sql = "SELECT usuario.nome_usuario AS nome_usuario, aluguel.data_coleta, aluguel.id_aluguel
+            FROM aluguel 
+            JOIN usuario ON aluguel.fk_id_usuario = usuario.id_usuario WHERE flg_ativo = 'S';";
+    
+        $resultado = mysqli_query($this->conexao, $sql);
+
+         $alugueis = [];
+
+        if ($resultado) {
+            while ($aluguel = mysqli_fetch_assoc($resultado)) {
+            $alugueis[] = $aluguel;
+        }
     }
+
+    return $alugueis;
+}
+
+    public function listAlugueisByUsername($u) {
+    $alugueis = [];
+
+    $stmt = $this->conexao->prepare("
+        SELECT usuario.nome_usuario, aluguel.data_coleta, aluguel.id_aluguel
+        FROM aluguel 
+        JOIN usuario ON aluguel.fk_id_usuario = usuario.id_usuario 
+        WHERE flg_ativo = 'S' AND usuario.nome_usuario LIKE ?
+    ");
+
+    if ($stmt) {
+        $param = "%" . $u . "%";
+        $stmt->bind_param("s", $param);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        while ($aluguel = $resultado->fetch_assoc()) {
+            $alugueis[] = $aluguel;
+        }
+
+        $stmt->close();
+    }
+
+        return $alugueis;
+    }
+
+    public function baixarAluguel($i){
+            $stmt = $this->conexao->prepare("UPDATE aluguel set flg_ativo = 'N' WHERE id_aluguel = ?");
+            $stmt->bind_param('i', $i);
+            $stmt->execute(); 
+            $stmt->close();
+    }
+}
+

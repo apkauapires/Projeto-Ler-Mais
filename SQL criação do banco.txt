@@ -48,6 +48,7 @@ CREATE TABLE Aluguel (
     fk_id_livro_aluguel INT,
     data_coleta DATE NOT NULL,
     dias_aluguel INT NOT NULL,
+    flg_ativo VARCHAR(2),
     FOREIGN KEY (fk_id_usuario) REFERENCES Usuario(id_usuario),
     FOREIGN KEY (fk_id_livro_aluguel) REFERENCES Livro_Aluguel(id_livro_aluguel)
 );

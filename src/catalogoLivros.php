@@ -17,7 +17,7 @@ session_start();
     <nav>
         <span id="userName">Olá, <?php echo $_SESSION['usuario'] ?> !</span>
         <button onclick="mostrarSecao('livros')" style="margin-right: 20px;">📖 Livros</button>
-        <button onclick="listarAlugueis()">📋 Aluguéis</button>
+        <a href = "view/aluguel/listarAlugueisPerfilUsuario.php">📋 Aluguéis</button>
     </nav>
 
     <section id="livros" class="active">
