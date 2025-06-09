@@ -12,7 +12,7 @@
       <div class="botoes">
         <a href="../categoria/form_categoria.php" class="botao">Cadastro de Categoria</a>
         <a href="../livro/form_livro.php" class="botao">Cadastro de Livro</a>
-        <a href="listagem_alugueis.html" class="botao">Listagem de Aluguéis</a>
+        <a href="../aluguel/listarAlugueis.php" class="botao">Listagem de Aluguéis</a>
         <br><br>
         <a href="../../controllers/deslogarUsuario.php" class="botaoSair">Sair</a>
 
