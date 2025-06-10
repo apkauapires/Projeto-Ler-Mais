@@ -102,44 +102,7 @@ section.active {
     background-color: #1f5d89;
 }
 
-form {
-    max-width: 500px;
-    margin: 0 auto;
-    background-color: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
 
-form label {
-    display: block;
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-form input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-form button {
-    margin-top: 20px;
-    width: 100%;
-    background-color: #09203F;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-form button:hover {
-    background-color: #09203F;
-}
 
 #busca {
     margin-bottom: 20px;

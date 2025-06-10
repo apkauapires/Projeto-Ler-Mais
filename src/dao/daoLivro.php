@@ -23,7 +23,7 @@
         }
 
         public function listarLivros() {
-            $sql = "SELECT * FROM livro ORDER BY nome_livro ASC";
+            $sql = "SELECT * FROM livro WHERE estoque_livro > 0 ORDER BY nome_livro ";
             $resultado = mysqli_query($this->conexao, $sql);
             $livros = [];
             while ($livro = mysqli_fetch_assoc($resultado)) {

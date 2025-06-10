@@ -1,6 +1,9 @@
 <?php
-session_start();
-?>
+    session_start();
+    require __DIR__ . "/dao/daoLivro.php";
+    $l = new DaoLivro($conexao);
+    $dados = $l->listarLivros();
+    ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,6 +11,81 @@ session_start();
     <title>LerMais - Biblioteca Comunitária</title>
     <link rel="stylesheet" href="components/style-catalogoLivros.css">
     <link rel="icon" type="image/png" href="../public/image/logo.png">
+    <script >
+        const livros = <?php echo json_encode($dados) ; ?>;
+               
+
+function normalizarTitulo(titulo) {
+    return titulo
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '') // remove acentos
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, '_'); // substitui espaços e pontuação
+}
+
+//função criar card livro (usada para exibir livros disponíveis)
+function criarCardLivro(livro, index) {
+    const card = document.createElement('form');
+    card.classList.add('livro-card');
+
+    const nomeImagem = normalizarTitulo(livro.nome_livro) + '.png';
+
+    card.innerHTML = `
+        <img src="view/livro/capas/${nomeImagem}" alt="${livro.nome_livro}"
+             onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';">
+        <h3>${livro.nome_livro}</h3>
+        <p>Autor: ${livro.autor_livro}</p>
+        <p>Gênero: ${livro.fk_id_categoria}</p>
+        <button onclick="adicionarAoCarrinho(${index})">Alugar</button>
+    `;
+
+    return card;
+}
+
+//Função exibir livros (principal para a seção de livros)
+function exibirLivros(lista = livros) {
+    const container = document.getElementById("livrosContainer");
+    container.innerHTML = "";
+
+    if (lista.length === 0) {
+        container.innerHTML = "<p>Nenhum livro encontrado.</p>";
+        return;
+    }
+
+    lista.forEach((livro, index) => {
+        const card = criarCardLivro(livro, index); // Passa o índice para o botão de alugar
+        container.appendChild(card);
+    });
+}
+
+//Chama a função para exibir os livros ao carregar a página
+window.addEventListener('load', exibirLivros);
+
+//Exemplo de função para filtrar livros
+function filtrarLivros() {
+    const termoBusca = document.getElementById('busca').value.toLowerCase();
+    const livrosFiltrados = livros.filter(livro =>
+        livro.titulo.toLowerCase().includes(termoBusca) ||
+        livro.autor.toLowerCase().includes(termoBusca)
+    );
+    exibirLivros(livrosFiltrados);
+}
+
+window.onload = () => exibirLivros();
+
+// Exibe livros ao carregar a página
+
+function toggleCarrinho() {
+    const carrinhoDiv = document.getElementById("carrinhoLateral");
+    carrinhoDiv.classList.toggle("aberto");
+    atualizarCarrinhoLateral();
+}
+
+function atualizarNomeUsuario(nome) {
+    const userNameElement = document.getElementById("userName");
+    userNameElement.textContent = "Olá, " + nome + "!";
+}
+    </script>
 </head>
 <body>
     <header>
@@ -15,15 +93,20 @@ session_start();
     </header>
 
     <nav>
-        <span id="userName">Olá, <?php echo $_SESSION['usuario'] ?> !</span>
+        <span id="userName" style="color: white;">Olá, <?php echo $_SESSION['usuario'] ?> !</span>
         <button onclick="mostrarSecao('livros')" style="margin-right: 20px;">📖 Livros</button>
-        <a href = "view/aluguel/listarAlugueisPerfilUsuario.php">📋 Aluguéis</button>
+        <!-- <a href = "view/aluguel/listarAlugueisPerfilUsuario.php">📋 Aluguéis</a>-->
     </nav>
 
     <section id="livros" class="active">
         <h2>📚 Livros Disponíveis</h2>
-        <input type="text" id="busca" placeholder="Buscar por título ou autor..." oninput="filtrarLivros()">
-        <div class="livros-container" id="livrosContainer"></div>
+        <form action="..." method="POST">
+            <input type="text" id="busca" placeholder="Buscar por título ou autor...">
+            <button ></button>
+        </form>
+        <div class="livros-container" id="livrosContainer">
+
+        </div>
     </section>
 
     <section id="alugueis">
@@ -41,6 +124,6 @@ session_start();
 
     <a href = "controllers/deslogarUsuario.php">Sair</a>
 
-    <script src="components/script.js"></script>
+    
 </body>
 </html>
