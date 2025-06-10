@@ -3,14 +3,16 @@
 class Aluguel {
     private int $id_aluguel;
     private int $fk_id_usuario;
-    private int $fk_id_livro_aluguel;
+    private int $fk_id_livro;
     private DateTime $data_coleta;
     private int $dias_aluguel;
 
-    public function __construct(int $id_aluguel, int $fk_id_usuario, int $fk_id_livro_aluguel, string $data_coleta, int $dias_aluguel) {
+
+    public function __construct(int $id_aluguel, int $fk_id_usuario, int $fk_id_livro, int $qtd_aluguel, string $data_coleta, int $dias_aluguel) {
         $this->id_aluguel = $id_aluguel;
         $this->fk_id_usuario = $fk_id_usuario;
-        $this->fk_id_livro_aluguel = $fk_id_livro_aluguel;
+        $this->fk_id_livro = $fk_id_livro;
+        $this->qtd_aluguel = $qtd_aluguel;
         $this->data_coleta = new DateTime($data_coleta);
         $this->dias_aluguel = $dias_aluguel;
     }
@@ -56,6 +58,26 @@ class Aluguel {
         $dataDevolucao->modify("+{$this->dias_aluguel} days");
         return $dataDevolucao;
     }
+
+    public function setQtdAluguel(int $q): void {
+        $this->qtd_aluguel = $q;
+    }
+
+    public function setFkLivro(int $l): void {
+        $this->fk_id_livro = $l;
+    }
+
+    public function getqtdAluguel(): int {
+        return $this->qtd_aluguel;
+    }
+
+    public function getFkLivro(): int {
+        return $this->fk_id_livro;
+    }
+
+
+
+
 }
 
 ?>

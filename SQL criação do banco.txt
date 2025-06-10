@@ -33,22 +33,16 @@ CREATE TABLE Usuario (
     senha_usuario VARCHAR(20)NOT NULL
 );
 
--- 4. Livro_Aluguel
-CREATE TABLE Livro_Aluguel (
-    id_livro_aluguel INT PRIMARY KEY AUTO_INCREMENT,
-    fk_id_livro INT NOT NULL,
-    qtd_aluguel INT NOT NULL DEFAULT 1,  -- Novo campo adicionado
-    FOREIGN KEY (fk_id_livro) REFERENCES Livro(id_livro)
-);
-
--- 5. Aluguel
+-- 4. Aluguel
 CREATE TABLE Aluguel (
     id_aluguel INT PRIMARY KEY AUTO_INCREMENT,
     fk_id_usuario INT NOT NULL,
-    fk_id_livro_aluguel INT,
+    fk_id_livro INT,
+    qtd_aluguel INT NOT NULL DEFAULT 1,
     data_coleta DATE NOT NULL,
     dias_aluguel INT NOT NULL,
     flg_ativo VARCHAR(2),
+    FOREIGN KEY (fk_id_livro) REFERENCES Livro(id_livro),
     FOREIGN KEY (fk_id_usuario) REFERENCES Usuario(id_usuario),
-    FOREIGN KEY (fk_id_livro_aluguel) REFERENCES Livro_Aluguel(id_livro_aluguel)
+
 );

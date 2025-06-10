@@ -23,6 +23,8 @@
                 <tr>
                 <th class="tnomeUsuario">Nome do usuario</th>
                 <th class="tdata">Data aluguel</th>
+                <th class="tdata">Livro Alugado</th>
+                <th class="tdata">Quantidade Alugada</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,6 +33,8 @@
                 <tr>
                     <td><?php echo $a['nome_usuario']; ?></td>
                     <td><?php echo $a['data_coleta']; ?></td>
+                    <td><?php echo $a['livro_alugado']; ?></td>
+                    <td><?php echo $a['qtd_alugada']; ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

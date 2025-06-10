@@ -19,9 +19,16 @@
         }
 
         public function listAlugueis() {
-        $sql = "SELECT usuario.nome_usuario AS nome_usuario, aluguel.data_coleta, aluguel.id_aluguel
-            FROM aluguel 
-            JOIN usuario ON aluguel.fk_id_usuario = usuario.id_usuario WHERE flg_ativo = 'S';";
+        $sql = "SELECT 
+                usuario.nome_usuario AS nome_usuario, 
+                aluguel.data_coleta, 
+                aluguel.id_aluguel,
+                livro.nome_livro,
+                aluguel.qtd_aluguel
+                FROM aluguel
+                JOIN usuario ON aluguel.fk_id_usuario = usuario.id_usuario
+                JOIN livro ON aluguel.fk_id_livro = livro.id_livro
+                WHERE flg_ativo = 'S';";
     
         $resultado = mysqli_query($this->conexao, $sql);
 
