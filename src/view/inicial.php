@@ -1,5 +1,6 @@
 <?php
     session_start();
+
     //unset($_SESSION['sacola']);
     require __DIR__ .  "/../../src/dao/daoLivro.php";
     $l = new daoLivro($conexao);

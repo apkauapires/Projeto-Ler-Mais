@@ -3,6 +3,7 @@
 
     $a = new daoAluguel($conexao);
     $alugueis = $a->listAlugueis();
+
 ?>
 
 <!DOCTYPE html>

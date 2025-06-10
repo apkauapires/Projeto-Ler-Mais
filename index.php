@@ -6,7 +6,7 @@ if($_SESSION['usuario']===null){
     exit;
 }
 
-if($_SESSION['usuario']==="admin sistema"){
+if($_SESSION['email']==="admin@sistema"){
     header("Location:src/view/painel_adm/painel_adm.php");
 }else{
     header("Location:src/catalogoLivros.php");

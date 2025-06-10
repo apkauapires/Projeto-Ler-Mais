@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . "../../dao/daLivroAluguel.php";
 
 $daoAluguel = new daoAluguel($conexao);

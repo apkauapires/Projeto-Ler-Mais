@@ -1,5 +1,4 @@
 <?php
-    session_start();
     require __DIR__ . "/../../dao/daLivroAluguel.php";
 
     $a = new daoAluguel($conexao);
@@ -33,8 +32,8 @@
                 <tr>
                     <td><?php echo $a['nome_usuario']; ?></td>
                     <td><?php echo $a['data_coleta']; ?></td>
-                    <td><?php echo $a['livro_alugado']; ?></td>
-                    <td><?php echo $a['qtd_alugada']; ?></td>
+                    <td><?php echo $a['nome_livro']; ?></td>
+                    <td><?php echo $a['qtd_aluguel']; ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

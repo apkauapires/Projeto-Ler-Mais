@@ -1,8 +1,11 @@
 <?php
     session_start();
+
     require __DIR__ . "/dao/daoLivro.php";
     $l = new DaoLivro($conexao);
     $dados = $l->listarLivros();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

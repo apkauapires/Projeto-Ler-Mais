@@ -17,6 +17,7 @@ if($email && $senha){
         if($u->getSenha()===$senha){
             $_SESSION['id'] = $u->getId();
             $_SESSION['usuario'] = $u->getNome();
+            $_SESSION['email'] = $email;
             header('Location:../../index.php');
             exit;
         }else{

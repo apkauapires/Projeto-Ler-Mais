@@ -5,6 +5,8 @@
     $nome = $_POST['nome'];
     $alugueis = $a->listAlugueisByUsername($nome);
 
+  
+
 ?>
 
 <!DOCTYPE html>

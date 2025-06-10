@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once __DIR__ . "../../classes/Livro.php";
 require_once __DIR__ . "../../dao/daoLivro.php";
