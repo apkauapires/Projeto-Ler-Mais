@@ -1,207 +1,115 @@
+<?php
+    session_start();
+    require __DIR__ . "/dao/daoLivro.php";
+    $l = new DaoLivro($conexao);
+    $dados = $l->listarLivros();
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>LerMais - Biblioteca Comunitária</title>
+    <link rel="stylesheet" href="components/style-catalogoLivros.css">
+    <link rel="icon" type="image/png" href="../public/image/logo.png">
+    <script>
+        const livros = <?php echo json_encode($dados); ?>;
 
+        function normalizarTitulo(titulo) {
+            return titulo
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .toLowerCase()
+                .replace(/[^a-z0-9]/g, '_');
+        }
 
-let alugueis = [];
-let carrinho = [];
+        function criarCardLivro(livro, index) {
+            const card = document.createElement('form');
+            card.classList.add('livro-card');
 
-function normalizarTitulo(titulo) {
-    return titulo
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '') // remove acentos
-        .toLowerCase()
-        .replace(/[^a-z0-9]/g, '_'); // substitui espaços e pontuação
-}
+            const nomeImagem = normalizarTitulo(livro.nome_livro) + '.png';
 
-//função criar card livro (usada para exibir livros disponíveis)
-function criarCardLivro(livro, index) {
-    const card = document.createElement('div');
-    card.classList.add('livro-card');
+            card.innerHTML = `
+                <img src="view/livro/capas/${nomeImagem}" alt="${livro.nome_livro}"
+                     onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';">
+                <h3>${livro.nome_livro}</h3>
+                <p>Autor: ${livro.autor_livro}</p>
+                <p>Gênero: ${livro.fk_id_categoria}</p>
+                <button onclick="adicionarAoCarrinho(${index})">Alugar</button>
+            `;
 
-    const nomeImagem = normalizarTitulo(livro.titulo) + '.png';
+            return card;
+        }
 
-    card.innerHTML = `
-        <img src="view/livro/capas/${nomeImagem}" alt="${livro.titulo}"
-             onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';">
-        <h3>${livro.titulo}</h3>
-        <p>Autor: ${livro.autor}</p>
-        <p>Gênero: ${livro.genero}</p>
-        <button onclick="adicionarAoCarrinho(${index})">Alugar</button>
-    `;
+        function exibirLivros(lista = livros) {
+            const container = document.getElementById("livrosContainer");
+            container.innerHTML = "";
 
-    return card;
-}
+            if (lista.length === 0) {
+                container.innerHTML = "<p>Nenhum livro encontrado.</p>";
+                return;
+            }
 
-//Função exibir livros (principal para a seção de livros)
-function exibirLivros(lista = livros) {
-    const container = document.getElementById("livrosContainer");
-    container.innerHTML = "";
-
-    if (lista.length === 0) {
-        container.innerHTML = "<p>Nenhum livro encontrado.</p>";
-        return;
-    }
-
-    lista.forEach((livro, index) => {
-        const card = criarCardLivro(livro, index); // Passa o índice para o botão de alugar
-        container.appendChild(card);
-    });
-}
-
-//Chama a função para exibir os livros ao carregar a página
-window.addEventListener('load', exibirLivros);
-
-//Exemplo de função para filtrar livros
-function filtrarLivros() {
-    const termoBusca = document.getElementById('busca').value.toLowerCase();
-    const livrosFiltrados = livros.filter(livro =>
-        livro.titulo.toLowerCase().includes(termoBusca) ||
-        livro.autor.toLowerCase().includes(termoBusca)
-    );
-    exibirLivros(livrosFiltrados);
-}
-
-// Alternar visibilidade de seções
-
-
-// Adicionar ao carrinho
-function adicionarAoCarrinho(index) {
-    const livro = livros[index];
-
-    if (carrinho.some(l => l.titulo === livro.titulo)) {
-        alert("Este livro já está no carrinho.");
-        return;
-    }
-
-    carrinho.push(livro);
-    alert(`"${livro.titulo}" adicionado ao carrinho.`);
-    atualizarCarrinhoLateral();
-}
-
-// Remover item do carrinho
-function removerDoCarrinho(index) {
-    carrinho.splice(index, 1);
-    atualizarCarrinhoLateral();
-}
-
-// Finalizar aluguel
-function finalizarAluguel() {
-    if (carrinho.length === 0) {
-        alert("Carrinho vazio.");
-        return;
-    }
-
-    const usuario = "Anônimo"; // Pode ser obtido de um campo de input, por exemplo
-
-    const hoje = new Date();
-    const devolucao = new Date();
-    devolucao.setDate(hoje.getDate() + 14);
-
-    const dataAluguel = hoje.toISOString().split('T')[0];
-    const dataDevolucao = devolucao.toISOString().split('T')[0];
-
-    const mensagemAluguel = `Aluguel finalizado com sucesso! Você tem 14 dias para devolver os livros.`;
-
-    carrinho.forEach(itemCarrinho => { // Use 'itemCarrinho' para evitar conflito com 'livro' global
-        // Encontre o livro completo na lista 'livros' para pegar autor/genero
-        const livroCompleto = livros.find(l => l.titulo === itemCarrinho.titulo);
-        if (livroCompleto) {
-            alugueis.push({
-                usuario,
-                titulo: livroCompleto.titulo, // Guarda o título completo
-                autor: livroCompleto.autor,   // Guarda o autor
-                genero: livroCompleto.genero, // Guarda o gênero
-                dataAluguel,
-                dataDevolucao
+            lista.forEach((livro, index) => {
+                const card = criarCardLivro(livro, index);
+                container.appendChild(card);
             });
         }
-    });
 
-    carrinho = [];
-    alert(mensagemAluguel);
-    listarAlugueis(); // Chama a função para exibir os aluguéis com o novo formato
-    atualizarCarrinhoLateral();
-}
+        function filtrarLivros() {
+            const termoBusca = document.getElementById('busca').value.toLowerCase();
+            const livrosFiltrados = livros.filter(livro =>
+                livro.nome_livro.toLowerCase().includes(termoBusca) ||
+                livro.autor_livro.toLowerCase().includes(termoBusca)
+            );
+            exibirLivros(livrosFiltrados);
+        }
 
+        window.onload = () => exibirLivros();
 
-// NOVO: Função para criar um card de aluguel (similar ao card de livro)
-function criarCardAluguel(aluguel) {
-    const card = document.createElement('div');
-    card.classList.add('livro-card', 'aluguel-card-display'); // Adiciona classe para estilização específica
+        function toggleCarrinho() {
+            const carrinhoDiv = document.getElementById("carrinhoLateral");
+            carrinhoDiv.classList.toggle("aberto");
+            atualizarCarrinhoLateral();
+        }
 
-    const nomeImagem = normalizarTitulo(aluguel.titulo) + '.png';
+        function atualizarNomeUsuario(nome) {
+            const userNameElement = document.getElementById("userName");
+            userNameElement.textContent = "Olá, " + nome + "!";
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>📚 LerMais - Biblioteca Comunitária</h1>
+    </header>
 
-    card.innerHTML = `
-        <img src="view/livro/capas/${nomeImagem}" alt="${aluguel.titulo}"
-             onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';">
-        <h3>${aluguel.titulo}</h3>
-        <p><strong>Autor:</strong> ${aluguel.autor}</p>
-        <p><strong>Gênero:</strong> ${aluguel.genero}</p>
-        <p class="aluguel-info"><strong>Usuário:</strong> ${aluguel.usuario}</p>
-        <p class="aluguel-info"><strong>Alugado em:</strong> ${aluguel.dataAluguel}</p>
-        <p class="aluguel-info"><strong>Devolução:</strong> ${aluguel.dataDevolucao}</p>
-        `;
-    return card;
-}
+    <nav>
+        <span id="userName" style="color: white;">Olá, <?php echo $_SESSION['usuario'] ?> !</span>
+        <button onclick="mostrarSecao('livros')" style="margin-right: 20px;">📖 Livros</button>
+        <!-- <a href = "view/aluguel/listarAlugueisPerfilUsuario.php">📋 Aluguéis</a>-->
+    </nav>
 
+    <section id="livros" class="active">
+        <h2>📚 Livros Disponíveis</h2>
+        <form onsubmit="event.preventDefault();">
+            <input type="text" id="busca" placeholder="Buscar por título ou autor..." oninput="filtrarLivros()">
+            <button type="submit">🔍</button>
+        </form>
+        <div class="livros-container" id="livrosContainer"></div>
+    </section>
 
-// Listar aluguéis
-function listarAlugueis() {
-    const containerAlugueis = document.getElementById("alugueisContainer");
-    containerAlugueis.innerHTML = "";
+    <section id="alugueis">
+        <h2>📋 Seus Aluguéis</h2>
+        <div class="alugueis-container" id="alugueisContainer"></div>
+    </section>
 
-    if (alugueis.length === 0) {
-        containerAlugueis.innerHTML = "<p>Nenhum aluguel registrado.</p>";
-        mostrarSecao("alugueis");
-        return;
-    }
+    <button id="abrirCarrinho" onclick="toggleCarrinho()">🛒</button>
+    <div id="carrinhoLateral">
+        <h3>Carrinho de Aluguel</h3>
+        <ul id="listaCarrinhoLateral"></ul>
+        <button id="botaoFinalizar" onclick="finalizarAluguel()">📦 Finalizar</button>
+    </div>
 
-    alugueis.forEach(aluguel => {
-        const card = criarCardAluguel(aluguel);
-        containerAlugueis.appendChild(card);
-    });
-
-    mostrarSecao("alugueis");
-}
-
-
-// Exibe livros ao carregar a página
-window.onload = () => exibirLivros();
-
-function toggleCarrinho() {
-    const carrinhoDiv = document.getElementById("carrinhoLateral");
-    carrinhoDiv.classList.toggle("aberto");
-    atualizarCarrinhoLateral();
-}
-
-function atualizarCarrinhoLateral() {
-    const lista = document.getElementById("listaCarrinhoLateral");
-    lista.innerHTML = "";
-
-    if (carrinho.length === 0) {
-        lista.innerHTML = "<li>Seu carrinho está vazio.</li>";
-        return;
-    }
-
-    carrinho.forEach((livro, index) => {
-        const item = document.createElement("li");
-        item.innerHTML = `
-            ${livro.titulo}
-            <button onclick="removerDoCarrinho(${index})">❌</button>
-        `;
-        lista.appendChild(item);
-    });
-}
-
-function atualizarNomeUsuario(nome) {
-    const userNameElement = document.getElementById("userName");
-    userNameElement.textContent = "Olá, " + nome + "!";
-}
-
-
-
-
-
-function logout() {
-    sessionStorage.clear();
-    localStorage.clear();
-    window.location.href = 'login.html';
-}
+    <a href="controllers/deslogarUsuario.php">Sair</a>
+</body>
+</html>
