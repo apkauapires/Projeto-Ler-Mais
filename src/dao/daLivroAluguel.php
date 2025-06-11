@@ -1,6 +1,6 @@
 <?php
     require_once __DIR__ . "/../config/config.php";
-    
+
     class daoAluguel{
         private $conexao;
         private $daoLivro;
@@ -19,7 +19,7 @@
             $qtd_livro = $la->getQtdAluguel();
             $stmt = $this->conexao->prepare("INSERT into aluguel(fk_id_usuario, fk_id_livro, qtd_aluguel, data_coleta, dias_aluguel, flg_ativo)
             values (?, ?, ?, ?, ?, 'S')");
-            $stmt->bind_param('iiiss', $id_usuario, $id_livro, $qtd_livro, $dataColeta, $dias_alugados);
+            $stmt->bind_param('iiisi', $id_usuario, $id_livro, $qtd_livro, $dataColeta, $dias_alugados);
             $stmt->execute(); 
             $stmt->close();
         }
