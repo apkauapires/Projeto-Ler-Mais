@@ -100,15 +100,17 @@
     <header>
         <h1> LerMais - Biblioteca Comunitária</h1>
     </header>
-    <nav>
-        <span id="userName" style="color: white;">Olá, <?php echo $_SESSION['usuario'] ?> !</span>
-        <button onclick="mostrarSecao('livros')" style="margin-right: 20px;"> Livros</button>
+    <nav id="rodape_inicial">
+        <p>Olá, <?php echo $_SESSION['usuario'] ?> !</p>
+        <a href="../index.php?navegation=1"> Livros</a>
+        <a href="../index.php?navegation=2"> Livros alugados</a>
+        <a href="controllers/deslogarUsuario.php">Sair</a>
     </nav>
     <section id="livros" class="active">
         <h2> Livros Disponíveis</h2>
         <form onsubmit="event.preventDefault();">
             <input type="text" id="busca" placeholder="Buscar por título ou autor..." oninput="filtrarLivros()">
-            <button type="submit">🔍</button>
+            <button type="submit" class="button_pesquisa">🔍</button>
         </form>
         <div class="livros-container" id="livrosContainer"></div>
     </section>
@@ -131,16 +133,15 @@
             $_SESSION['livros'][] = $alugado['id_livro'];
             $_SESSION['quantidade'][] = $alugado['quantidade'];
         ?>
-            <p><?php echo $alugado['titulo']; ?></p>
-            <button type="button" onclick="location.href='../src/controllers/sacolaDeLivros.php?tipo=adicao&id_livro=<?php echo $alugado['id_livro']; ?>'">+</button>
-            Quantidade: <?php echo $alugado['quantidade']; ?>
             <input type="hidden" name='quantidade' value="<?php echo $alugado['quantidade']; ?>">
             <input type="hidden" name='id_usuario' value="<?php echo $_SESSION['id']; ?>">
-            <button type="button" onclick="location.href='../src/controllers/sacolaDeLivros.php?tipo=subtracao&id_livro=<?php echo $alugado['id_livro']; ?>'">-</button>
+            <p><?php echo $alugado['titulo']; ?></p>
+            <button class="plin mais"  type="button" onclick="location.href='../src/controllers/sacolaDeLivros.php?tipo=adicao&id_livro=<?php echo $alugado['id_livro']; ?>'">+</button>
+            <?php echo $alugado['quantidade']; ?>
+            <button class="plin menos" type="button" onclick="location.href='../src/controllers/sacolaDeLivros.php?tipo=subtracao&id_livro=<?php echo $alugado['id_livro']; ?>'">-</button>
+            <p>_______________________________</p>
         <?php } ?>
         <button id="botaoFinalizar">📦 Finalizar</button>
     </form>
-
-    <a href="controllers/deslogarUsuario.php">Sair</a>
 </body>
 </html>

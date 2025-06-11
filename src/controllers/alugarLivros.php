@@ -19,6 +19,7 @@
         $data_coleta = date('d-m-Y');
         var_dump($data_coleta);
         $daoAluguel = new daoAluguel($conexao);
+        $daoLivro = new DaoLivro($conexao);
 
         if (!$fk_id_usuario || !$fk_id_livro || !$data_coleta) {
             header("Location: ../view/categoria/form_livro.php?error=missing_data");
@@ -31,8 +32,10 @@
                             $fk_id_livro[$i],
                             $qtd_livro[$i]
                         );
-                            $daoAluguel->insert($aluguel);        
+                            $daoAluguel->insert($aluguel);  
+                            $daoLivro->saidaEstoque($qtd_livro[$i],$fk_id_livro[$i]);      
             }
+            unset($_SESSION['sacola']);
             header("Location: ../catalogoLivros.php");
             exit();
         }

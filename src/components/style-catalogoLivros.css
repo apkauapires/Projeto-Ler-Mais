@@ -16,19 +16,22 @@ nav {
     display: flex;
     justify-content: center;
     background-color: #09203F;
+    font-size: 18px;
 }
-
-nav button {
-    padding: 15px 20px;
-    background-color: transparent;
+nav p{
     color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
+    margin-right: 15px;
 }
 
-nav button:hover {
-    background-color: #537895;
+nav a{
+    color: white;
+    text-decoration: none;
+    padding: 18px 15px;
+}
+
+nav a:hover{
+    padding-bottom: 13px;
+    border-bottom: 5px solid rgb(0, 132, 255);
 }
 
 section {
@@ -118,6 +121,8 @@ section.active {
     padding: 10px;
     width: 100%;
     border-radius: 5px;
+    border-end-end-radius: 0;
+    border-start-end-radius: 0;
     border: 1px solid #ccc;
 }
 
@@ -203,4 +208,30 @@ section.active {
 
 #carrinhoLateral li button:hover {
     background-color: #2471a3;
+}
+
+.button_pesquisa{
+    margin-left: -4px;
+    border: 1px solid #ccc;
+    border-end-end-radius: 5px;
+    border-start-end-radius: 5px;
+    border-left: none;
+    padding: 8px 13px 10px 10px;
+    background: white;
+}
+.plin{
+    font-size: 20px;
+    margin: 0 30px;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 10px;
+}
+.plin:hover{
+    cursor: pointer;
+}
+.mais {
+    background: #05c705;
+}
+.menos {
+    background: #e50404;
 }
