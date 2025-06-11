@@ -40,7 +40,8 @@
                 <h3>${livro.nome_livro}</h3>
                 <input type="hidden" name="titulo" value="${livro.nome_livro}">
                 <p>Autor: ${livro.autor_livro}</p>
-                <p>Gênero: ${livro.fk_id_categoria}</p>
+                <p>Gênero: ${livro.nome_categoria}</p>
+                <p>Estoque: ${livro.estoque_livro}</p>
                 <button type="submit" name="id_livro" value="${livro.id_livro}}">Alugar</button>
             `;
 
