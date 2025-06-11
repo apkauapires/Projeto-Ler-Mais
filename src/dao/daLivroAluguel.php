@@ -6,14 +6,14 @@
             $this->conexao = $conn;
         }
         public function insert(LivroAluguel $la){
-            $nome = $la->getIdUsuario();
-            $livros = $la->getLivros();
+            $id_usuario = $la->getIdUsuario();
+            $id_livro = $la->getLivros();
             $dataColeta = $la->getDataColeta();
-            $dataDevolucao = $la->getDataDevolucao();
-
-            $stmt = $this->conexao->prepare("INSERT into aluguel(fk_id_usuario, fk_id_livro, data_coleta, dias_alugel)
-            values (?, ?, ?, ?)");
-            $stmt->bind_param('iiss', $nome, $livros, $dataColeta, $dataDevolucao);
+            $dias_alugados = $la->getDiasAluguel();
+            $qtd_livro = $la->getQtdAluguel();
+            $stmt = $this->conexao->prepare("INSERT into aluguel(fk_id_usuario, fk_id_livro, qtd_aluguel, data_coleta, dias_aluguel, flg_ativo)
+            values (?, ?, ?, ?, ?, 'S')");
+            $stmt->bind_param('iiiss', $id_usuario, $id_livro, $qtd_livro, $dataColeta, $dias_alugados);
             $stmt->execute(); 
             $stmt->close();
         }

@@ -1,11 +1,13 @@
 <?php
     session_start();
-
     require __DIR__ . "/dao/daoLivro.php";
     $l = new DaoLivro($conexao);
     $dados = $l->listarLivros();
-
-
+    $sacola = $_SESSION['sacola'] ?? [];
+    $qtdSacola = count($sacola);
+    $_SESSION['id'] = 1;
+    $_SESSION['livros'] = [];
+    $_SESSION['quantidade'] = [];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -16,7 +18,6 @@
     <link rel="icon" type="image/png" href="../public/image/logo.png">
     <script>
         const livros = <?php echo json_encode($dados); ?>;
-
         function normalizarTitulo(titulo) {
             return titulo
                 .normalize('NFD')
@@ -27,17 +28,20 @@
 
         function criarCardLivro(livro, index) {
             const card = document.createElement('form');
+            card.method = 'POST';
+            card.action = '../src/controllers/sacolaDeLivros.php';
             card.classList.add('livro-card');
 
             const nomeImagem = normalizarTitulo(livro.nome_livro) + '.png';
 
             card.innerHTML = `
-                <img src="view/livro/capas/${nomeImagem}" alt="${livro.nome_livro}"
-                     onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';">
+                <img src="view/livro/capas/${nomeImagem}" alt="${livro.nome_livro}" onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';"> 
+                    <input type="hidden" name='img' value="${nomeImagem}">
                 <h3>${livro.nome_livro}</h3>
+                <input type="hidden" name="titulo" value="${livro.nome_livro}">
                 <p>Autor: ${livro.autor_livro}</p>
                 <p>Gênero: ${livro.fk_id_categoria}</p>
-                <button onclick="adicionarAoCarrinho(${index})">Alugar</button>
+                <button type="submit" name="id_livro" value="${livro.id_livro}}">Alugar</button>
             `;
 
             return card;
@@ -68,11 +72,11 @@
         }
 
         window.onload = () => exibirLivros();
+        //window.addEventListener('load', exibirLivros);
 
         function toggleCarrinho() {
             const carrinhoDiv = document.getElementById("carrinhoLateral");
             carrinhoDiv.classList.toggle("aberto");
-            atualizarCarrinhoLateral();
         }
 
         function atualizarNomeUsuario(nome) {
@@ -80,18 +84,25 @@
             userNameElement.textContent = "Olá, " + nome + "!";
         }
     </script>
+    <?php
+        if((isset($_GET['verificacao']) && $_GET['verificacao']=== "sim") && !empty($sacola)){
+    ?>
+          <script>
+            window.addEventListener('load', toggleCarrinho);
+          </script>
+    <?php    
+        }
+     ?>
 </head>
 <body>
     <header>
         <h1>📚 LerMais - Biblioteca Comunitária</h1>
     </header>
-
     <nav>
         <span id="userName" style="color: white;">Olá, <?php echo $_SESSION['usuario'] ?> !</span>
         <button onclick="mostrarSecao('livros')" style="margin-right: 20px;">📖 Livros</button>
         <!-- <a href = "view/aluguel/listarAlugueisPerfilUsuario.php">📋 Aluguéis</a>-->
     </nav>
-
     <section id="livros" class="active">
         <h2>📚 Livros Disponíveis</h2>
         <form onsubmit="event.preventDefault();">
@@ -105,13 +116,35 @@
         <h2>📋 Seus Aluguéis</h2>
         <div class="alugueis-container" id="alugueisContainer"></div>
     </section>
-
-    <button id="abrirCarrinho" onclick="toggleCarrinho()">🛒</button>
-    <div id="carrinhoLateral">
-        <h3>Carrinho de Aluguel</h3>
-        <ul id="listaCarrinhoLateral"></ul>
-        <button id="botaoFinalizar" onclick="finalizarAluguel()">📦 Finalizar</button>
-    </div>
+    <?php
+        if(!empty($sacola)){
+    ?>
+        <button id="abrirCarrinho" onclick="toggleCarrinho()">🛒</button>
+    <?php    
+    }else {
+        echo "<button id='abrirCarrinho' onclick=''>🛒</button>";
+    }
+     ?>
+    <form id="carrinhoLateral" method="POST" action="controllers/alugarLivros.php">
+        <h3>Carrinho de Aluguel</h3><input type="hidden" name="qtdSacola" value="<?php echo $qtdSacola; ?>">
+        <?php foreach ($sacola as $alugado){ 
+            $_SESSION['livros'][] = $alugado['id_livro'];
+            $_SESSION['quantidade'][] = $alugado['quantidade'];
+        ?>
+            <img src="view/livro/capas/<?php echo $alugado['src_img'];?>" alt="<?php echo $alugado['titulo'];?>" onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';" style="width: 50px; height: 75px;">
+            <button type="button" onclick="location.href='../src/controllers/sacolaDeLivros.php?tipo=adicao&id_livro=<?php echo $alugado['id_livro']; ?>'">
+                +
+            </button>
+            Quantidade: <?php echo $alugado['quantidade']; ?>;
+            <input type="hidden" name='quantidade' value="<?php echo $alugado['quantidade']; ?>">
+            <input type="hidden" name='id_usuario' value="<?php echo $_SESSION['id'] ;?>">        
+            <button type="button" onclick="location.href='../src/controllers/sacolaDeLivros.php?tipo=subtracao&id_livro=<?php echo $alugado['id_livro']; ?>'">
+                -
+            </button>
+            <?php } 
+            ?>
+        <button id="botaoFinalizar">📦 Finalizar</button>
+    </form>
 
     <a href="controllers/deslogarUsuario.php">Sair</a>
 </body>

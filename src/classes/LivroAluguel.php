@@ -5,7 +5,8 @@
         public function __construct(
             public readonly string $id_usuario,
             public readonly string $data_coleta,
-            private array $livros,
+            private int $livros,
+            private int $qtd_aluguel 
         ){
             $this->data_devolucao = $this->dataDevolver($this->data_coleta, $this->dias_aluguel);
         }
@@ -17,7 +18,7 @@
         public function getDataDevolucao():string{
             return $this->data_devolucao;
         }   
-        public function getLivros():array{
+        public function getLivros():int{
             return $this->livros;
         }   
         public function getIdUsuario():string{
@@ -28,6 +29,9 @@
         }
         public function getDiasAluguel():int{
             return $this->dias_aluguel;
+        }
+        public function getQtdAluguel():int{
+            return $this->qtd_aluguel;
         }
 
     }
