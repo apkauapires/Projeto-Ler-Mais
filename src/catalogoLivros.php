@@ -28,24 +28,26 @@
         }
 
         function criarCardLivro(livro, index) {
-            const card = document.createElement('form');
-            card.method = 'POST';
-            card.action = '../src/controllers/sacolaDeLivros.php';
-            card.classList.add('livro-card');
+        const card = document.createElement('form');
+        card.method = 'POST';
+        card.action = '../src/controllers/sacolaDeLivros.php';
+        card.classList.add('livro-card');
 
-            const nomeImagem = normalizarTitulo(livro.nome_livro) + '.png';
+        const nomeImagem = normalizarTitulo(livro.nome_livro) + '.png';
 
-            card.innerHTML = `
-                <img src="view/livro/capas/${nomeImagem}" alt="${livro.nome_livro}" onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';"> 
-                <input type="hidden" name='img' value="${nomeImagem}">
-                <h3>${livro.nome_livro}</h3>
-                <input type="hidden" name="titulo" value="${livro.nome_livro}">
-                <p>Autor: ${livro.autor_livro}</p>
-                <p>Gênero: ${livro.nome_categoria}</p>
-                <p>Estoque: ${livro.estoque_livro}</p>
-                <button type="submit" name="id_livro" value="${livro.id_livro}">Alugar</button>
-            `;
+        card.innerHTML = `
+            <img src="view/livro/capas/${nomeImagem}" alt="${livro.nome_livro}" onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';"> 
+            <input type="hidden" name='img' value="${nomeImagem}">
+            <h3>${livro.nome_livro}</h3>
+            <input type="hidden" name="titulo" value="${livro.nome_livro}">
+            <p>Autor: ${livro.autor_livro}</p>
+            <p>Gênero: ${livro.nome_categoria}</p>
+            <p>Estoque: ${livro.estoque_livro}</p>
+            <button type="submit" name="id_livro" value="${livro.id_livro}">Alugar</button>
+        `;
 
+        return card;
+    }
 
         
 
