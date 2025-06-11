@@ -18,6 +18,7 @@
     <link rel="icon" type="image/png" href="../public/image/logo.png">
     <script>
         const livros = <?php echo json_encode($dados); ?>;
+
         function normalizarTitulo(titulo) {
             return titulo
                 .normalize('NFD')
@@ -36,28 +37,32 @@
 
             card.innerHTML = `
                 <img src="view/livro/capas/${nomeImagem}" alt="${livro.nome_livro}" onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';"> 
-                    <input type="hidden" name='img' value="${nomeImagem}">
+                <input type="hidden" name='img' value="${nomeImagem}">
                 <h3>${livro.nome_livro}</h3>
                 <input type="hidden" name="titulo" value="${livro.nome_livro}">
                 <p>Autor: ${livro.autor_livro}</p>
                 <p>Gênero: ${livro.nome_categoria}</p>
                 <p>Estoque: ${livro.estoque_livro}</p>
-                <button type="submit" name="id_livro" value="${livro.id_livro}}">Alugar</button>
+                <button type="submit" name="id_livro" value="${livro.id_livro}">Alugar</button>
             `;
 
             return card;
         }
 
+        
+
         function exibirLivros(lista = livros) {
             const container = document.getElementById("livrosContainer");
             container.innerHTML = "";
 
-            if (lista.length === 0) {
+            const livrosFiltrados = lista.filter(livro => livro.estoque_livro > 0);
+
+            if (livrosFiltrados.length === 0) {
                 container.innerHTML = "<p>Nenhum livro encontrado.</p>";
                 return;
             }
 
-            lista.forEach((livro, index) => {
+            livrosFiltrados.forEach((livro, index) => {
                 const card = criarCardLivro(livro, index);
                 container.appendChild(card);
             });
@@ -66,14 +71,14 @@
         function filtrarLivros() {
             const termoBusca = document.getElementById('busca').value.toLowerCase();
             const livrosFiltrados = livros.filter(livro =>
-                livro.nome_livro.toLowerCase().includes(termoBusca) ||
-                livro.autor_livro.toLowerCase().includes(termoBusca)
+                (livro.nome_livro.toLowerCase().includes(termoBusca) ||
+                livro.autor_livro.toLowerCase().includes(termoBusca)) &&
+                livro.estoque_livro > 0
             );
             exibirLivros(livrosFiltrados);
         }
 
         window.onload = () => exibirLivros();
-        //window.addEventListener('load', exibirLivros);
 
         function toggleCarrinho() {
             const carrinhoDiv = document.getElementById("carrinhoLateral");
@@ -85,15 +90,11 @@
             userNameElement.textContent = "Olá, " + nome + "!";
         }
     </script>
-    <?php
-        if((isset($_GET['verificacao']) && $_GET['verificacao']=== "sim") && !empty($sacola)){
-    ?>
-          <script>
+    <?php if ((isset($_GET['verificacao']) && $_GET['verificacao'] === "sim") && !empty($sacola)) { ?>
+        <script>
             window.addEventListener('load', toggleCarrinho);
-          </script>
-    <?php    
-        }
-     ?>
+        </script>
+    <?php } ?>
 </head>
 <body>
     <header>
@@ -102,7 +103,6 @@
     <nav>
         <span id="userName" style="color: white;">Olá, <?php echo $_SESSION['usuario'] ?> !</span>
         <button onclick="mostrarSecao('livros')" style="margin-right: 20px;">📖 Livros</button>
-        <!-- <a href = "view/aluguel/listarAlugueisPerfilUsuario.php">📋 Aluguéis</a>-->
     </nav>
     <section id="livros" class="active">
         <h2>📚 Livros Disponíveis</h2>
@@ -117,36 +117,30 @@
         <h2>📋 Seus Aluguéis</h2>
         <div class="alugueis-container" id="alugueisContainer"></div>
     </section>
-    <?php
-        if(!empty($sacola)){
-    ?>
+
+    <?php if (!empty($sacola)) { ?>
         <button id="abrirCarrinho" onclick="toggleCarrinho()">🛒</button>
-    <?php    
-    }else {
-        echo "<button id='abrirCarrinho' onclick=''>🛒</button>";
-    }
-     ?>
+    <?php } else { ?>
+        <button id="abrirCarrinho" onclick="">🛒</button>
+    <?php } ?>
+
     <form id="carrinhoLateral" method="POST" action="controllers/alugarLivros.php">
-        <h3>Carrinho de Aluguel</h3><input type="hidden" name="qtdSacola" value="<?php echo $qtdSacola; ?>">
-        <?php foreach ($sacola as $alugado){ 
+        <h3>Carrinho de Aluguel</h3>
+        <input type="hidden" name="qtdSacola" value="<?php echo $qtdSacola; ?>">
+        <?php foreach ($sacola as $alugado) {
             $_SESSION['livros'][] = $alugado['id_livro'];
             $_SESSION['quantidade'][] = $alugado['quantidade'];
         ?>
-            <img src="view/livro/capas/<?php echo $alugado['src_img'];?>" alt="<?php echo $alugado['titulo'];?>" onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';" style="width: 50px; height: 75px;">
-            <button type="button" onclick="location.href='../src/controllers/sacolaDeLivros.php?tipo=adicao&id_livro=<?php echo $alugado['id_livro']; ?>'">
-                +
-            </button>
+            <img src="view/livro/capas/<?php echo $alugado['src_img']; ?>" alt="<?php echo $alugado['titulo']; ?>" onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';" style="width: 50px; height: 75px;">
+            <button type="button" onclick="location.href='../src/controllers/sacolaDeLivros.php?tipo=adicao&id_livro=<?php echo $alugado['id_livro']; ?>'">+</button>
             Quantidade: <?php echo $alugado['quantidade']; ?>;
             <input type="hidden" name='quantidade' value="<?php echo $alugado['quantidade']; ?>">
-            <input type="hidden" name='id_usuario' value="<?php echo $_SESSION['id'] ;?>">        
-            <button type="button" onclick="location.href='../src/controllers/sacolaDeLivros.php?tipo=subtracao&id_livro=<?php echo $alugado['id_livro']; ?>'">
-                -
-            </button>
-            <?php } 
-            ?>
+            <input type="hidden" name='id_usuario' value="<?php echo $_SESSION['id']; ?>">
+            <button type="button" onclick="location.href='../src/controllers/sacolaDeLivros.php?tipo=subtracao&id_livro=<?php echo $alugado['id_livro']; ?>'">-</button>
+        <?php } ?>
         <button id="botaoFinalizar">📦 Finalizar</button>
     </form>
 
     <a href="controllers/deslogarUsuario.php">Sair</a>
 </body>
-</html
+</html>
