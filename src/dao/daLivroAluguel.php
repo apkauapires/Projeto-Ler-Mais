@@ -1,10 +1,16 @@
 <?php
     require_once __DIR__ . "/../config/config.php";
+    
     class daoAluguel{
         private $conexao;
+        private $daoLivro;
+
         public function __construct(mysqli $conn){
             $this->conexao = $conn;
         }
+
+        
+
         public function insert(LivroAluguel $la){
             $id_usuario = $la->getIdUsuario();
             $id_livro = $la->getLivros();
@@ -20,15 +26,16 @@
 
         public function listAlugueis() {
         $sql = "SELECT 
-                usuario.nome_usuario AS nome_usuario, 
-                aluguel.data_coleta, 
-                aluguel.id_aluguel,
-                livro.nome_livro,
-                aluguel.qtd_aluguel
-                FROM aluguel
-                JOIN usuario ON aluguel.fk_id_usuario = usuario.id_usuario
-                JOIN livro ON aluguel.fk_id_livro = livro.id_livro
-                WHERE flg_ativo = 'S';";
+        usuario.nome_usuario AS nome_usuario, 
+        aluguel.data_coleta, 
+        aluguel.id_aluguel,
+        livro.id_livro,
+        livro.nome_livro,
+        aluguel.qtd_aluguel
+        FROM aluguel
+        JOIN usuario ON aluguel.fk_id_usuario = usuario.id_usuario
+        JOIN livro ON aluguel.fk_id_livro = livro.id_livro
+        WHERE flg_ativo = 'S';;";
     
         $resultado = mysqli_query($this->conexao, $sql);
 

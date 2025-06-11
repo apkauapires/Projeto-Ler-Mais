@@ -46,4 +46,20 @@
             $stmt->close();
             return $livro;
         }
+
+        public function saidaEstoque($qtd,$id){
+            $stmt = $this->conexao->prepare("UPDATE livro SET estoque_livro = estoque_livro - ? WHERE id_livro = ?");
+            $stmt->bind_param('ii', $qtd, $id);
+            $stmt->execute(); 
+            $stmt->close();
+        }
+
+        public function entradaEstoque($qtd,$id){
+            $stmt = $this->conexao->prepare("UPDATE livro SET estoque_livro = estoque_livro + ? WHERE id_livro = ?");
+            $stmt->bind_param('ii', $qtd, $id);
+            $stmt->execute(); 
+            $stmt->close();
+        }
+
+
     }

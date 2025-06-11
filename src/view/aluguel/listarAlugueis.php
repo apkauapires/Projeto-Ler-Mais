@@ -42,7 +42,7 @@
                     <td><?php echo $a['nome_livro']; ?></td>
                     <td><?php echo $a['qtd_aluguel']; ?></td>
                     <td>
-                         <a href="../../controllers/baixarAluguel.php?id_aluguel=<?= $a['id_aluguel'] ?>" 
+                         <a href="../../controllers/baixarAluguel.php?id_aluguel=<?= $a['id_aluguel']?>&id_livro=<?= $a['id_livro']?>&qtd_aluguel=<?= $a['qtd_aluguel']?>" 
                           class="baixarAlu" onclick="return confirm('Tem certeza que deseja baixar este aluguel?');">Dar baixa</a>
                     </td>
                 </tr>

@@ -4,6 +4,8 @@
     $qtdSacola = count($sacola);       
     require_once __DIR__ . "../../classes/LivroAluguel.php";
     require __DIR__ . "/../dao/daLivroAluguel.php";
+    require __DIR__ . "/../dao/daoLivro.php";
+
         $fk_id_usuario = $_POST['id_usuario'];
         foreach ($_SESSION['livros'] as $livro){
             $fk_id_livro[] = $livro;
