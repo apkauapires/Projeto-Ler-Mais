@@ -131,9 +131,9 @@
             $_SESSION['livros'][] = $alugado['id_livro'];
             $_SESSION['quantidade'][] = $alugado['quantidade'];
         ?>
-            <img src="view/livro/capas/<?php echo $alugado['src_img']; ?>" alt="<?php echo $alugado['titulo']; ?>" onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';" style="width: 50px; height: 75px;">
+            <p><?php echo $alugado['titulo']; ?></p>
             <button type="button" onclick="location.href='../src/controllers/sacolaDeLivros.php?tipo=adicao&id_livro=<?php echo $alugado['id_livro']; ?>'">+</button>
-            Quantidade: <?php echo $alugado['quantidade']; ?>;
+            Quantidade: <?php echo $alugado['quantidade']; ?>
             <input type="hidden" name='quantidade' value="<?php echo $alugado['quantidade']; ?>">
             <input type="hidden" name='id_usuario' value="<?php echo $_SESSION['id']; ?>">
             <button type="button" onclick="location.href='../src/controllers/sacolaDeLivros.php?tipo=subtracao&id_livro=<?php echo $alugado['id_livro']; ?>'">-</button>

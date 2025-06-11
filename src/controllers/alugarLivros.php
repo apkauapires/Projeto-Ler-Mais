@@ -21,8 +21,8 @@
         $daoAluguel = new daoAluguel($conexao);
 
         if (!$fk_id_usuario || !$fk_id_livro || !$data_coleta) {
-            //header("Location: ../view/categoria/form_livro.php?error=missing_data");
-            //exit();
+            header("Location: ../view/categoria/form_livro.php?error=missing_data");
+            exit();
         }else{
             for ($i=0; $i < $qtdSacola ; $i++) { 
                     $aluguel = new LivroAluguel(
@@ -33,5 +33,6 @@
                         );
                             $daoAluguel->insert($aluguel);        
             }
-                echo "DEU CERTO";
+            header("Location: ../catalogoLivros.php");
+            exit();
         }

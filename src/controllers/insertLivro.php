@@ -38,5 +38,5 @@ $livro = new Livro($nome, $autor, $categoria, $estoque, $caminhoImagem, $descric
 $livroDao = new daoLivro($conexao);
 $livroDao->insert($livro);
 
-header("Location: ../view/painel_adm/painel_adm.php");
+header("Location: ../view/livro/form_livro.php");
 exit;
