@@ -46,8 +46,6 @@
                 <button type="submit" name="id_livro" value="${livro.id_livro}">Alugar</button>
             `;
 
-            return card;
-        }
 
         
 
@@ -98,14 +96,14 @@
 </head>
 <body>
     <header>
-        <h1>📚 LerMais - Biblioteca Comunitária</h1>
+        <h1> LerMais - Biblioteca Comunitária</h1>
     </header>
     <nav>
         <span id="userName" style="color: white;">Olá, <?php echo $_SESSION['usuario'] ?> !</span>
-        <button onclick="mostrarSecao('livros')" style="margin-right: 20px;">📖 Livros</button>
+        <button onclick="mostrarSecao('livros')" style="margin-right: 20px;"> Livros</button>
     </nav>
     <section id="livros" class="active">
-        <h2>📚 Livros Disponíveis</h2>
+        <h2> Livros Disponíveis</h2>
         <form onsubmit="event.preventDefault();">
             <input type="text" id="busca" placeholder="Buscar por título ou autor..." oninput="filtrarLivros()">
             <button type="submit">🔍</button>
@@ -114,7 +112,7 @@
     </section>
 
     <section id="alugueis">
-        <h2>📋 Seus Aluguéis</h2>
+        <h2> Seus Aluguéis</h2>
         <div class="alugueis-container" id="alugueisContainer"></div>
     </section>
 
