@@ -30,20 +30,27 @@
                 <th width="220" class="tdata">Data aluguel</th>
                 <th width="220" class="tdata">Livro Alugado</th>
                 <th width="220" class="tdata">Quantidade Alugada</th>
-                <th width="220">Baixar aluguel</th>
+                <th width="220">Status</th>
                 </tr>
                 </thead>
                 <tbody>
                 <br><br>
-                <?php foreach($alugueis as $a): ?>
+                <?php foreach($alugueis as $al): ?>
                 <tr>
-                    <td><?php echo $a['nome_usuario']; ?></td>
-                    <td><?php echo $a['data_coleta']; ?></td>
-                    <td><?php echo $a['nome_livro']; ?></td>
-                    <td><?php echo $a['qtd_aluguel']; ?></td>
+                    <td><?php echo $al['nome_usuario']; ?></td>
+                    <td><?php echo $al['data_coleta']; ?></td>
+                    <td><?php echo $al['nome_livro']; ?></td>
+                    <td><?php echo $al['qtd_aluguel']; ?></td>
+                    
                     <td>
-                         <a href="../../controllers/baixarAluguel.php?id_aluguel=<?= $a['id_aluguel']?>&id_livro=<?= $a['id_livro']?>&qtd_aluguel=<?= $a['qtd_aluguel']?>" 
-                          class="baixarAlu" onclick="return confirm('Tem certeza que deseja baixar este aluguel?');">Dar baixa</a>
+                         <?php if($a->verificaStatus($al['id_aluguel'])=='P'){ ?>
+                            <a href="../../controllers/efetivarAluguel.php?id_aluguel=<?= $al['id_aluguel'] ?>" 
+                          class="baixarAlu" onclick="return confirm('Tem certeza que deseja baixar este aluguel?');">Efetivar</a>
+                          <?php
+                        }elseif($a->verificaStatus($al['id_aluguel'])=='S'){ ?>
+                            <a href="../../controllers/baixarAluguel.php?id_aluguel=<?= $al['id_aluguel'] ?>" 
+                          class="baixarAlu" onclick="return confirm('Tem certeza que deseja efetivar este aluguel?');">Dar baixa</a>
+                        <?php } ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

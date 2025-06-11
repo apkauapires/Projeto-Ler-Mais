@@ -18,11 +18,24 @@
             $dias_alugados = $la->getDiasAluguel();
             $qtd_livro = $la->getQtdAluguel();
             $stmt = $this->conexao->prepare("INSERT into aluguel(fk_id_usuario, fk_id_livro, qtd_aluguel, data_coleta, dias_aluguel, flg_ativo)
-            values (?, ?, ?, ?, ?, 'S')");
+            values (?, ?, ?, ?, ?, 'P')");
             $stmt->bind_param('iiisi', $id_usuario, $id_livro, $qtd_livro, $dataColeta, $dias_alugados);
             $stmt->execute(); 
             $stmt->close();
         }
+
+        public function verificaStatus($i) {
+        $stmt = $this->conexao->prepare("SELECT flg_ativo FROM aluguel WHERE id_aluguel = ?");
+        $stmt->bind_param("i", $i);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+    
+        if ($linha = $resultado->fetch_assoc()) {
+            return trim($linha['flg_ativo']); 
+        }
+
+    return null;
+    }
 
         public function listAlugueis() {
         $sql = "SELECT 
@@ -35,7 +48,7 @@
         FROM aluguel
         JOIN usuario ON aluguel.fk_id_usuario = usuario.id_usuario
         JOIN livro ON aluguel.fk_id_livro = livro.id_livro
-        WHERE flg_ativo = 'S';;";
+        WHERE flg_ativo != 'N';;";
     
         $resultado = mysqli_query($this->conexao, $sql);
 
@@ -78,6 +91,13 @@
 
     public function baixarAluguel($i){
             $stmt = $this->conexao->prepare("UPDATE aluguel set flg_ativo = 'N' WHERE id_aluguel = ?");
+            $stmt->bind_param('i', $i);
+            $stmt->execute(); 
+            $stmt->close();
+    }
+
+    public function efetivarAluguel($i){
+            $stmt = $this->conexao->prepare("UPDATE aluguel set flg_ativo = 'S' WHERE id_aluguel = ?");
             $stmt->bind_param('i', $i);
             $stmt->execute(); 
             $stmt->close();
