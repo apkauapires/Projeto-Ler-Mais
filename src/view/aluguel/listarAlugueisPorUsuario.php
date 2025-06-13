@@ -4,9 +4,7 @@
     $a = new daoAluguel($conexao);
     $nome = $_POST['nome'];
     $alugueis = $a->listAlugueisByUsername($nome);
-
-  
-
+    
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +29,7 @@
 </head>
 <body>
     <a href="/Projeto-Ler-Mais/index.php?navegation=1" class="sair_button">
-    voltar
+    Voltar
     </a>
     <div>
     <form action = "listarAlugueisPorUsuario.php" method="post">

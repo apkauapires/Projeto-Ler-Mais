@@ -29,7 +29,7 @@
 <body>
     <div>
         <a href="/Projeto-Ler-Mais/index.php?navegation=1" class="sair_button">
-        voltar
+        Voltar
         </a>
         <table>
             <thead>

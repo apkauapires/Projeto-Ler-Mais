@@ -18,7 +18,7 @@ if($email && $senha){
             $_SESSION['id'] = $u->getId();
             $_SESSION['usuario'] = $u->getNome();
             $_SESSION['email'] = $email;
-            header('Location:../../index.php?navegation=1');
+            header("Location:../../index.php?navegation=1&&tipo=todos");
             exit;
         }else{
             $_SESSION['message'] = 'E-mail ou senha inválidos!';

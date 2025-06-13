@@ -1,5 +1,5 @@
 <?php 
-    error_reporting(E_ERROR);
+    // error_reporting(E_ERROR);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +55,6 @@
         if($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 1){
             include 'src/view/painel_adm/painel_adm.php';
         }elseif(isset($_SESSION['email']) && $_GET['navegation'] == 1){
-            // header("Location:src/catalogoLivros.php");
             include 'src/catalogoLivros.php';
         }
         elseif (isset($_SESSION['email']) && $_GET['navegation'] == 2) {

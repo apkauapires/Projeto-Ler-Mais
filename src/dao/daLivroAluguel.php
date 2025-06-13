@@ -70,7 +70,7 @@
         SELECT usuario.nome_usuario, aluguel.data_coleta, aluguel.id_aluguel
         FROM aluguel 
         JOIN usuario ON aluguel.fk_id_usuario = usuario.id_usuario 
-        WHERE flg_ativo = 'S' AND usuario.nome_usuario LIKE ?
+        WHERE flg_ativo = 'S' AND usuario.nome_usuario LIKE '?'
     ");
 
     if ($stmt) {

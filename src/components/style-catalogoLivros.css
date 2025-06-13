@@ -23,13 +23,17 @@ nav p{
     margin-right: 15px;
 }
 
-nav a{
+nav button{
     color: white;
+    background: none;
+    border: none;
+    font-size: 18px;
     text-decoration: none;
     padding: 18px 15px;
 }
 
-nav a:hover{
+nav button:hover{
+    cursor: pointer;
     padding-bottom: 13px;
     border-bottom: 5px solid rgb(0, 132, 255);
 }

@@ -1,5 +1,5 @@
 <?php
-    require __DIR__ . "../../..//dao/daLivroAluguel.php";
+    require __DIR__ . "../../../dao/daLivroAluguel.php";
 
     $a = new daoAluguel($conexao);
     $alugueis = $a->listAlugueis();

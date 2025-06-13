@@ -1,10 +1,17 @@
 <?php
     require __DIR__ . "/dao/daoLivro.php";
-    $l = new DaoLivro($conexao);
-    $dados = $l->listarLivros();
+    require __DIR__ . "/dao/daLivroAluguel.php";
+    if($_GET['tipo'] == 'todos'){
+        $l = new DaoLivro($conexao);
+        $dados = $l->listarLivros();
+    }elseif($_GET['tipo'] == 'seus'){
+        $l = new daoAluguel($conexao);
+        var_dump($_SESSION['id']);
+        $dados = $l->listAlugueisByUsername($_SESSION['id']);
+        var_dump($dados);
+    }
     $sacola = $_SESSION['sacola'] ?? [];
     $qtdSacola = count($sacola);
-    $_SESSION['id'] = 1;
     $_SESSION['livros'] = [];
     $_SESSION['quantidade'] = [];
 ?>
@@ -13,7 +20,6 @@
 <head>
     <meta charset="UTF-8">
     <title>LerMais - Biblioteca Comunitária</title>
-    <!-- <link rel="stylesheet" href="components/style-catalogoLivros.css"> -->
     <script>
         const livros = <?php echo json_encode($dados); ?>;
 
@@ -100,9 +106,9 @@
     </header>
     <nav id="rodape_inicial">
         <p><?php echo $_SESSION['usuario'] ?></p>
-        <a href="../index.php?navegation=1"> Livros</a>
-        <a href="../index.php?navegation=2"> Livros alugados</a>
-        <a href="src/controllers/deslogarUsuario.php">Sair</a>
+        <button type="button" onclick="location.href='index.php?navegation=1&&tipo=todos'">Livros</button>
+        <button type="button" onclick="location.href='index.php?navegation=1&&tipo=seus'">Livros Alugados</button>
+        <button type="button" onclick="location.href='src/controllers/deslogarUsuario.php'">Sair</button>
     </nav>
     <section id="livros" class="active">
         <h2> Livros Disponíveis</h2>
