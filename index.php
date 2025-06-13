@@ -17,7 +17,6 @@
                 font-size: 20px;
                 text-decoration: none;
                 border-radius: 15px;
-                box-shadow: -4px -6px 20px -8px rgba(0,0,0,0.75) inset;
             }
         </style>
         <?php
