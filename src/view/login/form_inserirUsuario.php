@@ -54,10 +54,6 @@
       e.target.value = value;
     });
   </script>
-
-
-
-
         <label for="email"><b>E-mail:</b></label>
         <input type="email" id="email_usuario" name="email_usuario" required>
 
