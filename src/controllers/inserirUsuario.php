@@ -25,7 +25,7 @@ if(!$usuarioDao->findByEmail($email)){
         $u->setSenha($senha);
         $usuarioDao->insert($u);
         $_SESSION['message'] = "Usuario cadastrado com SUCESSO!";
-        header("Location:../../index.php?navegation=1");
+        header("Location:../../index.php");
         $_SESSION['nome'] = "";
         $_SESSION['email'] = "";
         $_SESSION['contato'] = "";

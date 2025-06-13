@@ -33,7 +33,7 @@
                 echo "<link rel='stylesheet' href='src/components/style-cadastroLivro.css'>";
             }elseif (isset($_SESSION['email']) && $_GET['navegation'] == 4){
                  echo "<link rel='stylesheet' href='src/components/style-listarAlugueis.css'>";
-            }elseif ($_GET['navegation'] == 5){
+            }elseif ($_SESSION['usuario']===null && $_GET['navegation'] == 5){
                 echo "<link rel='stylesheet' href='src/components/style-cadastroUsuario.css'>";
             }
         
