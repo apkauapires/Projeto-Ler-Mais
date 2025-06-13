@@ -99,7 +99,7 @@
         <h1> LerMais - Biblioteca Comunitária</h1>
     </header>
     <nav id="rodape_inicial">
-        <p>Olá, <?php echo $_SESSION['usuario'] ?> !</p>
+        <p><?php echo $_SESSION['usuario'] ?></p>
         <a href="../index.php?navegation=1"> Livros</a>
         <a href="../index.php?navegation=2"> Livros alugados</a>
         <a href="src/controllers/deslogarUsuario.php">Sair</a>
