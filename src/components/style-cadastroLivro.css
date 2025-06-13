@@ -6,11 +6,6 @@
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     background-image: url(../public/image/imagem.navy\,opaca.png);
 }
 
@@ -24,7 +19,7 @@ div {
     gap: 40px;
     width: 90%;
     max-width: 550px;
-    margin: 0;
+    margin: 70px  auto;
 }
 
 form {

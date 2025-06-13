@@ -1,5 +1,4 @@
 <?php
-    session_start();
     require __DIR__ . "/dao/daoLivro.php";
     $l = new DaoLivro($conexao);
     $dados = $l->listarLivros();
@@ -14,8 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <title>LerMais - Biblioteca Comunitária</title>
-    <link rel="stylesheet" href="components/style-catalogoLivros.css">
-    <link rel="icon" type="image/png" href="../public/image/logo.png">
+    <!-- <link rel="stylesheet" href="components/style-catalogoLivros.css"> -->
     <script>
         const livros = <?php echo json_encode($dados); ?>;
 
@@ -30,7 +28,7 @@
         function criarCardLivro(livro, index) {
         const card = document.createElement('form');
         card.method = 'POST';
-        card.action = '../src/controllers/sacolaDeLivros.php';
+        card.action = 'src/controllers/sacolaDeLivros.php';
         card.classList.add('livro-card');
 
         const nomeImagem = normalizarTitulo(livro.nome_livro) + '.png';
@@ -104,7 +102,7 @@
         <p>Olá, <?php echo $_SESSION['usuario'] ?> !</p>
         <a href="../index.php?navegation=1"> Livros</a>
         <a href="../index.php?navegation=2"> Livros alugados</a>
-        <a href="controllers/deslogarUsuario.php">Sair</a>
+        <a href="src/controllers/deslogarUsuario.php">Sair</a>
     </nav>
     <section id="livros" class="active">
         <h2> Livros Disponíveis</h2>
@@ -126,7 +124,7 @@
         <button id="abrirCarrinho" onclick="">🛒</button>
     <?php } ?>
 
-    <form id="carrinhoLateral" method="POST" action="controllers/alugarLivros.php">
+    <form id="carrinhoLateral" method="POST" action="src/controllers/alugarLivros.php">
         <h3>Carrinho de Aluguel</h3>
         <input type="hidden" name="qtdSacola" value="<?php echo $qtdSacola; ?>">
         <?php foreach ($sacola as $alugado) {
@@ -136,9 +134,9 @@
             <input type="hidden" name='quantidade' value="<?php echo $alugado['quantidade']; ?>">
             <input type="hidden" name='id_usuario' value="<?php echo $_SESSION['id']; ?>">
             <p><?php echo $alugado['titulo']; ?></p>
-            <button class="plin mais"  type="button" onclick="location.href='../src/controllers/sacolaDeLivros.php?tipo=adicao&id_livro=<?php echo $alugado['id_livro']; ?>'">+</button>
+            <button class="plin mais"  type="button" onclick="location.href='src/controllers/sacolaDeLivros.php?tipo=adicao&id_livro=<?php echo $alugado['id_livro']; ?>'">+</button>
             <?php echo $alugado['quantidade']; ?>
-            <button class="plin menos" type="button" onclick="location.href='../src/controllers/sacolaDeLivros.php?tipo=subtracao&id_livro=<?php echo $alugado['id_livro']; ?>'">-</button>
+            <button class="plin menos" type="button" onclick="location.href='src/controllers/sacolaDeLivros.php?tipo=subtracao&id_livro=<?php echo $alugado['id_livro']; ?>'">-</button>
             <p>_______________________________</p>
         <?php } ?>
         <button id="botaoFinalizar">📦 Finalizar</button>

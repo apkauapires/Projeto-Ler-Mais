@@ -12,7 +12,7 @@ $qtd = $_GET['qtd_aluguel'];
 $daoAluguel->efetivarAluguel($id);
 
 
-header("Location: ../view/aluguel/listarAlugueis.php");
+header("Location: ../../index.php?navegation=4");
 
 
 

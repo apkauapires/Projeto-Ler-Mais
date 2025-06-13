@@ -1,5 +1,5 @@
 <?php
-    require __DIR__ . "/../../dao/daLivroAluguel.php";
+    require __DIR__ . "../../..//dao/daLivroAluguel.php";
 
     $a = new daoAluguel($conexao);
     $alugueis = $a->listAlugueis();
@@ -12,17 +12,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ListaAlugueis</title>
-    <link rel="stylesheet" href="../../components/style-listarAlugueis.css">
 </head>
 <body>
+    <a href="index.php?navegation=1" class="sair_button">
+        Sair
+    </a>
     <div>
-    <form action = "listarAlugueisPorUsuario.php" method="post">
-    <label for="nome"></label>
-        <h1 class="cabeçalho">Alugueis</h1>
-      <input type="text" id="nome" name="nome" placeholder="Nome do usuário">
-     <input type="submit" class="buscarAlu" value="Buscar">
-    </form>    
-    <h1></h1>
+        <form action = "src/view/aluguel/listarAlugueisPorUsuario.php" method="post">
+            <label for="nome"></label>
+            <h1 class="cabeçalho">Alugueis</h1>
+            <input type="text" id="nome" name="nome" placeholder="Nome do usuário">
+            <input type="submit" class="buscarAlu" value="Buscar">
+        </form>    
         <table>
             <thead>
                 <tr>
@@ -44,11 +45,11 @@
                     
                     <td>
                          <?php if($a->verificaStatus($al['id_aluguel'])=='P'){ ?>
-                            <a href="../../controllers/efetivarAluguel.php?id_aluguel=<?= $al['id_aluguel'] ?>" 
+                            <a href="src/controllers/efetivarAluguel.php?id_aluguel=<?= $al['id_aluguel'] ?>" 
                           class="baixarAlu" onclick="return confirm('Tem certeza que deseja baixar este aluguel?');">Efetivar</a>
                           <?php
                         }elseif($a->verificaStatus($al['id_aluguel'])=='S'){ ?>
-                            <a href="../../controllers/baixarAluguel.php?id_aluguel=<?= $al['id_aluguel'] ?>" 
+                            <a href="src/controllers/baixarAluguel.php?id_aluguel=<?= $al['id_aluguel'] ?>" 
                           class="baixarAlu" onclick="return confirm('Tem certeza que deseja efetivar este aluguel?');">Dar baixa</a>
                         <?php } ?>
                     </td>

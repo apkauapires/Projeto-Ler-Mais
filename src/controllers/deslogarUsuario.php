@@ -11,7 +11,7 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-header('Location: /projeto-ler-mais/src/view/login/form_loginUsuario.php');
+header('Location: ../../index.php');
 exit;
 
 ?>

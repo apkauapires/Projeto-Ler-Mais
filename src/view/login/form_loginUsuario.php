@@ -1,19 +1,18 @@
 <?php
-session_start();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <title>Tela de Login</title>
-  <link rel="stylesheet" type="text/css" href="../../components/style-loginUsuario.css"> 
+  <!-- <link rel="stylesheet" type="text/css" href="../../components/style-loginUsuario.css">  -->
 </head>
 <body>
   <div class="container">
     <div class="form-container">
      
          <div class="logo-titulo">
-  <img src="../../public/image/logo.png" alt="Logo Ler Mais" class="logo">
+  <img src="src/public/image/logo.png" alt="Logo Ler Mais" class="logo">
         <h1>Ler Mais</h1>
       </div>
 
@@ -26,7 +25,7 @@ session_start();
         }
       ?>
 
-      <form action="../../controllers/logarUsuario.php" method="POST">
+      <form action="src/controllers/logarUsuario.php" method="POST">
         <label for="email_usuario"><b>E-mail:</b></label>
         <input type="email" id="email_usuario" name="email_usuario">
 

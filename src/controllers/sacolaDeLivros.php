@@ -27,7 +27,7 @@
         $id_livro = $_GET['id_livro'] ?? null;
         if ($id_livro !== null && isset($_SESSION['sacola'][$id_livro])) {
             $_SESSION['sacola'][$id_livro]['quantidade']++;
-            header('Location: ../catalogoLivros.php?verificacao=sim');
+            header('Location: ../../index.php?navegation=1&&verificacao=sim');
             exit;
         }
     } elseif ($_GET['tipo'] === "subtracao") {
@@ -35,21 +35,21 @@
         if ($id_livro !== null && isset($_SESSION['sacola'][$id_livro])) {
             if ($_SESSION['sacola'][$id_livro]['quantidade'] > 1 && !empty($_SESSION['sacola'])) {
                 $_SESSION['sacola'][$id_livro]['quantidade']--;
-                header('Location: ../catalogoLivros.php?verificacao=sim');
+                header('Location: ../../index.php?navegation=1&&verificacao=sim');
                 exit;
             }elseif($_SESSION['sacola'][$id_livro]['quantidade'] >= 1 && !empty($_SESSION['sacola'])){
                 unset($_SESSION['sacola'][$id_livro]);
-                header('Location: ../catalogoLivros.php?verificacao=sim');
+                header('Location: ../../index.php?navegation=1&&verificacao=sim');
                 exit;
             }else {
                 unset($_SESSION['sacola'][$id_livro]);
-                header('Location: ../catalogoLivros.php?verificacao=nao');
+                header('Location: ../../index.php?verificacao=nao');
                 exit;
             }
         }
     }
 
     // Redireciona de volta ou para a sacola
-        header('Location: ../catalogoLivros.php?verificacao=sim');
+        header('Location: ../../index.php?navegation=1&&verificacao=sim');
         exit;
 ?>

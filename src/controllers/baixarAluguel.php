@@ -13,7 +13,7 @@ $daoAluguel->baixarAluguel($id);
 $daoLivro->entradaEstoque($qtd,$idLivro);
 
 
-header("Location: ../view/aluguel/listarAlugueis.php");
+header("Location: ../../index.php?navegation=4");
 
 
 

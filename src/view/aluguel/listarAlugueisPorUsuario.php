@@ -16,8 +16,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ListaAlugueis</title>
     <link rel="stylesheet" href="../../components/style-listarAlugueis.css">
+    <style>
+            .sair_button{
+                margin-left: 60px;
+                position: absolute;
+                padding: 15px 25px;
+                background: white;
+                color: blue;
+                font-size: 20px;
+                text-decoration: none;
+                border-radius: 15px;
+                box-shadow: -4px -6px 20px -8px rgba(0,0,0,0.75) inset;
+            }
+        </style>
 </head>
 <body>
+    <a href="/Projeto-Ler-Mais/index.php?navegation=1" class="sair_button">
+    Sair
+    </a>
     <div>
     <form action = "listarAlugueisPorUsuario.php" method="post">
     <label for="nome"></label>
@@ -25,7 +41,6 @@
       <input type="text" id="nome" name="nome" placeholder="Nome do usuário">
      <input type="submit" class="buscarAlu" value="Buscar">
     </form>    
-    <h1></h1>
         <table>
             <thead>
                 <tr>

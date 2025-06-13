@@ -27,7 +27,7 @@ $nomeImagemFinal = $nomeImagemSemExtensao . "." . $extensaoImagem;
 $caminhoImagem = "../view/livro/capas/" . $nomeImagemFinal;
 
 if (!$nome || !$autor || !$estoque || !$descricao || !$nomeImagemOriginal) {
-    header("Location: ../view/livro/form_livro.php");
+    header("Location:../../index.php?navegation=3");
     exit;
 }
 
@@ -38,5 +38,5 @@ $livro = new Livro($nome, $autor, $categoria, $estoque, $caminhoImagem, $descric
 $livroDao = new daoLivro($conexao);
 $livroDao->insert($livro);
 
-header("Location: ../view/livro/form_livro.php");
+header("Location:../../index.php?navegation=3");
 exit;

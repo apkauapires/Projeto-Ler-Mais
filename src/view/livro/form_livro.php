@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . "/../../dao/daoCategoria.php";
+require __DIR__ . "../../../dao/daoCategoria.php";
 
 $l = new daoCategoria($conexao);
 $livros = $l->listaCategoria();
@@ -12,11 +12,13 @@ $livros = $l->listaCategoria();
     <meta charset="UTF-8">
     <title>Cadastro de Livro</title>
 </head>
-<link rel="stylesheet" href="../../components/style-cadastroLivro.css">
 <body>
+    <a href="/Projeto-Ler-Mais/index.php?navegation=1" class="sair_button">
+    Sair
+    </a>
     <div class="principal">
         <h1>Cadastro de Livro</h1>
-        <form action="../../controllers/insertLivro.php" method="post" enctype="multipart/form-data">
+        <form action="src/controllers/insertLivro.php" method="post" enctype="multipart/form-data">
             <label for="nome">Nome do Livro:</label>
             <input type="text" placeholder="Livro..." id="nome_livro" name="nome_livro" required>
 

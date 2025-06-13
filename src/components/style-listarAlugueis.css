@@ -1,12 +1,10 @@
 * {
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 100px;
     background-image: url(../public/image/imagem.navy\,opaca.png);
 }
 
@@ -21,7 +19,9 @@ input {
 
 div {
     background-color: #ffffff;
-    padding: 100px;
+    margin: 70px auto  ;
+    width: 930px;
+    padding: 40px 60px;
     text-align: center;
     border-radius: 16px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);

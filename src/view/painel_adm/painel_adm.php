@@ -4,18 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Painel do Administrador</title>
-  <link rel="stylesheet" href="../../components/style-painelAdm.css">
-</head>
 <body>
   <div class="container">
     <div class="admin-panel">
       <h1>Painel do Administrador</h1>
       <div class="botoes">
-        <a href="../categoria/form_categoria.php" class="botao">Cadastro de Categoria</a>
-        <a href="../livro/form_livro.php" class="botao">Cadastro de Livro</a>
-        <a href="../aluguel/listarAlugueis.php" class="botao">Listagem de Aluguéis</a>
-        <br><br>
-        <a href="../../controllers/deslogarUsuario.php" class="botaoSair">Sair</a>
+        <a href="index.php?navegation=2" class="botao">Cadastro de Categoria</a>
+        <a href="index.php?navegation=3" class="botao">Cadastro de Livro</a>
+        <a href="index.php?navegation=4" class="botao">Listagem de Aluguéis</a>
+        <br>
+        <a href="src/controllers/deslogarUsuario.php" class="botao">Sair</a>
 
       </div>
     </div>
