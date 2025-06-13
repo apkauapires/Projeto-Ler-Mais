@@ -32,7 +32,7 @@
 </head>
 <body>
     <a href="/Projeto-Ler-Mais/index.php?navegation=1" class="sair_button">
-    Sair
+    voltar
     </a>
     <div>
     <form action = "listarAlugueisPorUsuario.php" method="post">

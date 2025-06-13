@@ -14,7 +14,7 @@ $livros = $l->listaCategoria();
 </head>
 <body>
     <a href="/Projeto-Ler-Mais/index.php?navegation=1" class="sair_button">
-    Sair
+    Voltar
     </a>
     <div class="principal">
         <h1>Cadastro de Livro</h1>

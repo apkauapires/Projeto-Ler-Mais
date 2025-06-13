@@ -15,7 +15,7 @@
 </head>
 <body>
     <a href="index.php?navegation=1" class="sair_button">
-        Sair
+        Voltar
     </a>
     <div>
         <form action = "src/view/aluguel/listarAlugueisPorUsuario.php" method="post">

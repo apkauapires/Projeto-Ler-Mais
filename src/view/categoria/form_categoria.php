@@ -8,7 +8,7 @@
 </head>
 <body>
     <a href="/Projeto-Ler-Mais/index.php?navegation=1" class="sair_button">
-    Sair
+    Voltar
     </a>
     <div class="text-button">
         <form action="src/controllers/insertCategoria.php" method="POST">
