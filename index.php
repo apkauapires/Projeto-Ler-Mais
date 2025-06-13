@@ -33,7 +33,8 @@
                 echo "<link rel='stylesheet' href='src/components/style-cadastroLivro.css'>";
             }elseif (isset($_SESSION['email']) && $_GET['navegation'] == 4){
                  echo "<link rel='stylesheet' href='src/components/style-listarAlugueis.css'>";
-                // echo "<link rel='stylesheet' href='src/components/style-cadastroUsuario.css'>";
+            }elseif ($_GET['navegation'] == 5){
+                echo "<link rel='stylesheet' href='src/components/style-cadastroUsuario.css'>";
             }
         
         ?>
@@ -43,10 +44,12 @@
     <body>
         <?php
 
-        if($_SESSION['usuario']===null){
+        if($_SESSION['usuario']===null && $_GET['navegation'] === null){
             include 'src/view/login/form_loginUsuario.php';
             
             exit;
+        }elseif ($_SESSION['usuario']===null && $_GET['navegation'] == 5) {
+            include 'src/view/login/form_inserirUsuario.php';
         }
 
         if($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 1){

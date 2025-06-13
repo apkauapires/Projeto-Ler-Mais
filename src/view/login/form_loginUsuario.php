@@ -35,7 +35,7 @@
         <button type="submit">Entrar</button>
 
         <div class="login-link">
-          <p>Ainda não tem uma conta? <a href="form_inserirUsuario.php">Registre-se</a></p>
+          <p>Ainda não tem uma conta? <a href="index.php?navegation=5">Registre-se</a></p>
         </div>
       </form>
     </div>

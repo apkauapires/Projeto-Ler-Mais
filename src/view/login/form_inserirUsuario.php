@@ -1,5 +1,4 @@
 <?php
-session_start();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -7,7 +6,6 @@ session_start();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro - Ler Mais</title>
- <link rel="stylesheet" href="../../components/style-cadastroUsuario.css">
 
 </head>
 <body>
@@ -15,7 +13,7 @@ session_start();
     <div class="form-container">
 
       <div class="logo-titulo">
-  <img src="../../public/image/logo.png" alt="Logo Ler Mais" class="logo">
+  <img src="src/public/image/logo.png" alt="Logo Ler Mais" class="logo">
   <h1>Ler Mais</h1>
 
 </div>
@@ -27,7 +25,7 @@ session_start();
         }
       ?>
     
-      <form action="../../controllers/inserirUsuario.php" method="post">
+      <form action="src/controllers/inserirUsuario.php" method="post">
         <label for="nome"><b>Nome:</b></label>
         <input type="text" id="nome_usuario" name="nome_usuario" required>
 
@@ -72,7 +70,7 @@ session_start();
         <button type="submit">Cadastrar-se</button>
       </form>
 
-      <p class="login-link">Já tem uma conta? <a href="form_loginUsuario.php">Faça login</a></p>
+      <p class="login-link">Já tem uma conta? <a href="/Projeto-Ler-Mais/index.php">Faça login</a></p>
     </div>
 
     <div class="image-container">

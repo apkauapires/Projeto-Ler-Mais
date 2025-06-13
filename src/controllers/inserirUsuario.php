@@ -25,7 +25,7 @@ if(!$usuarioDao->findByEmail($email)){
         $u->setSenha($senha);
         $usuarioDao->insert($u);
         $_SESSION['message'] = "Usuario cadastrado com SUCESSO!";
-        header("Location: ../view/login/form_loginUsuario.php");
+        header("Location:../../index.php?navegation=1");
         $_SESSION['nome'] = "";
         $_SESSION['email'] = "";
         $_SESSION['contato'] = "";
@@ -40,7 +40,7 @@ if(!$usuarioDao->findByEmail($email)){
         $_SESSION['contato'] = $contato;
         $_SESSION['senha'] = "";
         $_SESSION['senhaRepeticao'] = "";
-        header("Location: ../view/login/form_inserirUsuario.php");
+        header("Location:../../index.php?navegation=5");
         exit;
         
     }
@@ -51,7 +51,7 @@ if(!$usuarioDao->findByEmail($email)){
     $_SESSION['contato'] = $contato;
     $_SESSION['senha'] = $senha;
     $_SESSION['senhaRepeticao'] = $senhaRepeticao;
-    header("Location: ../view/login/form_inserirUsuario.php");
+    header("Location:../../index.php?navegation=5");
     exit;
 }
 
