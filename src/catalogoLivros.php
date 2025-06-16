@@ -37,7 +37,7 @@
                 card.classList.add('livro-card');
                 const nomeImagem = normalizarTitulo(livro.nome_livro) + '.png';
                 card.innerHTML = `
-                    <img src="view/livro/capas/${nomeImagem}" alt="${livro.nome_livro}" onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';"> 
+                    <img src="src/view/livro/capas/${nomeImagem}" alt="${livro.nome_livro}" onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';"> 
                     <input type="hidden" name='img' value="${nomeImagem}">
                     <h3>${livro.nome_livro}</h3>
                     <input type="hidden" name="titulo" value="${livro.nome_livro}">
@@ -120,7 +120,7 @@
                 <?php 
                     foreach ($dados as $meusLivros) {
                         echo "<form method='POST' action='src/controllers/sacolaDeLivros.php' class='livro-card'>";
-                        echo "<img src='view/livro/capas/'" . $meusLivros['nome_livro']."'>";
+                        echo "<img src='src/view/livro/capas/'" . $meusLivros['nome_livro']."'>";
                         echo "<h3>".$meusLivros['nome_livro']."</h3>";
                         echo "<p>Alugado:" . $meusLivros['qtd_aluguel']."</p>";
                         echo "<p>Status:" . ($meusLivros['flg_ativo'] == "S") ? "Alugado</p>" : "Entregue</p>";

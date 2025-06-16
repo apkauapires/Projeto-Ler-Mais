@@ -36,6 +36,6 @@
                             $daoLivro->saidaEstoque($qtd_livro[$i],$fk_id_livro[$i]);      
             }
             unset($_SESSION['sacola']);
-            header("Location: ../catalogoLivros.php");
+            header("Location: ../../index.php?navegation=1&&verificacao=sim&&tipo=todos");
             exit();
         }
