@@ -43,10 +43,6 @@ section {
     padding: 30px;
 }
 
-section.active {
-    display: block;
-}
-
 /* Container para os cards de livros e agora também para os cards de aluguel */
 .livros-container, .alugueis-container {
     display: flex;

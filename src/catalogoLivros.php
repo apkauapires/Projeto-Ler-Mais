@@ -6,9 +6,7 @@
         $dados = $l->listarLivros();
     }elseif($_GET['tipo'] == 'seus'){
         $l = new daoAluguel($conexao);
-        var_dump($_SESSION['id']);
-        $dados = $l->listAlugueisByUsername($_SESSION['id']);
-        var_dump($dados);
+        $dados = $l->listAlugueisPeloID($_SESSION['id']);
     }
     $sacola = $_SESSION['sacola'] ?? [];
     $qtdSacola = count($sacola);
@@ -20,41 +18,43 @@
 <head>
     <meta charset="UTF-8">
     <title>LerMais - Biblioteca Comunitária</title>
-    <script>
-        const livros = <?php echo json_encode($dados); ?>;
-
-        function normalizarTitulo(titulo) {
-            return titulo
-                .normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '')
-                .toLowerCase()
-                .replace(/[^a-z0-9]/g, '_');
+    <?php
+        if($_GET['tipo'] == 'todos'){
+    ?>
+        <script>
+            const livros = <?php echo json_encode($dados); ?>;
+            function normalizarTitulo(titulo) {
+                return titulo
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '')
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]/g, '_');
+            }
+            function criarCardLivro(livro) {
+                const card = document.createElement('form');
+                card.method = 'POST';
+                card.action = 'src/controllers/sacolaDeLivros.php';
+                card.classList.add('livro-card');
+                const nomeImagem = normalizarTitulo(livro.nome_livro) + '.png';
+                card.innerHTML = `
+                    <img src="view/livro/capas/${nomeImagem}" alt="${livro.nome_livro}" onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';"> 
+                    <input type="hidden" name='img' value="${nomeImagem}">
+                    <h3>${livro.nome_livro}</h3>
+                    <input type="hidden" name="titulo" value="${livro.nome_livro}">
+                    <p>Autor: ${livro.autor_livro}</p>
+                    <p>Gênero: ${livro.nome_categoria}</p>
+                    <p>Estoque: ${livro.estoque_livro}</p>
+                    <button type="submit" name="id_livro" value="${livro.id_livro}">Alugar</button>
+                `;
+                return card;
+            }
+        </script>
+    <?php
         }
-
-        function criarCardLivro(livro, index) {
-        const card = document.createElement('form');
-        card.method = 'POST';
-        card.action = 'src/controllers/sacolaDeLivros.php';
-        card.classList.add('livro-card');
-
-        const nomeImagem = normalizarTitulo(livro.nome_livro) + '.png';
-
-        card.innerHTML = `
-            <img src="view/livro/capas/${nomeImagem}" alt="${livro.nome_livro}" onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';"> 
-            <input type="hidden" name='img' value="${nomeImagem}">
-            <h3>${livro.nome_livro}</h3>
-            <input type="hidden" name="titulo" value="${livro.nome_livro}">
-            <p>Autor: ${livro.autor_livro}</p>
-            <p>Gênero: ${livro.nome_categoria}</p>
-            <p>Estoque: ${livro.estoque_livro}</p>
-            <button type="submit" name="id_livro" value="${livro.id_livro}">Alugar</button>
-        `;
-
-        return card;
-    }
+    ?>
 
         
-
+    <script>
         function exibirLivros(lista = livros) {
             const container = document.getElementById("livrosContainer");
             container.innerHTML = "";
@@ -66,8 +66,8 @@
                 return;
             }
 
-            livrosFiltrados.forEach((livro, index) => {
-                const card = criarCardLivro(livro, index);
+            livrosFiltrados.forEach((livro) => {
+                const card = criarCardLivro(livro);
                 container.appendChild(card);
             });
         }
@@ -110,26 +110,32 @@
         <button type="button" onclick="location.href='index.php?navegation=1&&tipo=seus'">Livros Alugados</button>
         <button type="button" onclick="location.href='src/controllers/deslogarUsuario.php'">Sair</button>
     </nav>
-    <section id="livros" class="active">
+    <section id="livros" style="<?php echo ($_GET['tipo'] == 'todos') ? "display: block;" : "display:none"; ?>">
         <h2> Livros Disponíveis</h2>
         <form onsubmit="event.preventDefault();">
             <input type="text" id="busca" placeholder="Buscar por título ou autor..." oninput="filtrarLivros()">
             <button type="submit" class="button_pesquisa">🔍</button>
         </form>
-        <div class="livros-container" id="livrosContainer"></div>
+        <div class="livros-container" id="livrosContainer">
+
+        </div>
     </section>
-
-    <section id="alugueis">
-        <h2> Seus Aluguéis</h2>
-        <div class="alugueis-container" id="alugueisContainer"></div>
+    <section id="alugueis" style="<?php echo ($_GET['tipo'] == 'seus') ? "display: block;" : "display:none"; ?>">
+            <h2> Seus Aluguéis</h2>
+            <div class="alugueis-container" id="alugueisContainer">
+                <?php 
+                    foreach ($dados as $meusLivros) {
+                        echo "<form method='POST' action='src/controllers/sacolaDeLivros.php'>";
+                        echo "<img src='view/livro/capas/'" . $meusLivros['nome_livro']."'>";
+                        echo "<h3>".$meusLivros['nome_livro']."</h3>";
+                        echo "<p>Alugado:" . $meusLivros['qtd_aluguel']."</p>";
+                        echo "<p>Status:" . ($meusLivros['flg_ativo'] == "S") ? "Alugado</p>" : "Entregue</p>";
+                        echo "</form>";
+                    }
+                ?>
+            </div>
     </section>
-
-    <?php if (!empty($sacola)) { ?>
-        <button id="abrirCarrinho" onclick="toggleCarrinho()">🛒</button>
-    <?php } else { ?>
-        <button id="abrirCarrinho" onclick="">🛒</button>
-    <?php } ?>
-
+    <button id="abrirCarrinho" onclick="<?php echo (!empty($sacola)) ? "toggleCarrinho()" : ""; ?>">🛒</button>
     <form id="carrinhoLateral" method="POST" action="src/controllers/alugarLivros.php">
         <h3>Carrinho de Aluguel</h3>
         <input type="hidden" name="qtdSacola" value="<?php echo $qtdSacola; ?>">

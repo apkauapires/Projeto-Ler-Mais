@@ -88,6 +88,32 @@
 
         return $alugueis;
     }
+    public function listAlugueisPeloID($id) {
+    $alugueis = [];
+
+    $stmt = $this->conexao->prepare("
+        SELECT aluguel.id_aluguel, livro.nome_livro, aluguel.qtd_aluguel, aluguel.flg_ativo
+        FROM `aluguel` 
+        INNER JOIN usuario ON usuario.id_usuario = aluguel.fk_id_usuario 
+        INNER JOIN livro ON livro.id_livro = aluguel.fk_id_livro 
+        WHERE aluguel.flg_ativo = 'S' AND aluguel.fk_id_usuario = ? 
+        ORDER BY aluguel.id_aluguel;
+    ");
+
+    if ($stmt) {
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        while ($aluguel = $resultado->fetch_assoc()) {
+            $alugueis[] = $aluguel;
+        }
+
+        $stmt->close();
+    }
+
+        return $alugueis;
+    }
 
     public function baixarAluguel($i){
             $stmt = $this->conexao->prepare("UPDATE aluguel set flg_ativo = 'N' WHERE id_aluguel = ?");
