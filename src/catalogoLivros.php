@@ -48,47 +48,41 @@
                 `;
                 return card;
             }
+            function exibirLivros(lista = livros) {
+                const container = document.getElementById("livrosContainer");
+                container.innerHTML = "";
+
+                const livrosFiltrados = lista.filter(livro => livro.estoque_livro > 0);
+
+                if (livrosFiltrados.length === 0) {
+                    container.innerHTML = "<p>Nenhum livro encontrado.</p>";
+                    return;
+                }
+
+                livrosFiltrados.forEach((livro) => {
+                    const card = criarCardLivro(livro);
+                    container.appendChild(card);
+                });
+            }
+            function filtrarLivros() {
+                const termoBusca = document.getElementById('busca').value.toLowerCase();
+                const livrosFiltrados = livros.filter(livro =>
+                    (livro.nome_livro.toLowerCase().includes(termoBusca) ||
+                    livro.autor_livro.toLowerCase().includes(termoBusca)) &&
+                    livro.estoque_livro > 0
+                );
+                exibirLivros(livrosFiltrados);
+            }
+            window.onload = () => exibirLivros();
         </script>
     <?php
         }
-    ?>
-
-        
+    ?>        
     <script>
-        function exibirLivros(lista = livros) {
-            const container = document.getElementById("livrosContainer");
-            container.innerHTML = "";
-
-            const livrosFiltrados = lista.filter(livro => livro.estoque_livro > 0);
-
-            if (livrosFiltrados.length === 0) {
-                container.innerHTML = "<p>Nenhum livro encontrado.</p>";
-                return;
-            }
-
-            livrosFiltrados.forEach((livro) => {
-                const card = criarCardLivro(livro);
-                container.appendChild(card);
-            });
-        }
-
-        function filtrarLivros() {
-            const termoBusca = document.getElementById('busca').value.toLowerCase();
-            const livrosFiltrados = livros.filter(livro =>
-                (livro.nome_livro.toLowerCase().includes(termoBusca) ||
-                livro.autor_livro.toLowerCase().includes(termoBusca)) &&
-                livro.estoque_livro > 0
-            );
-            exibirLivros(livrosFiltrados);
-        }
-
-        window.onload = () => exibirLivros();
-
         function toggleCarrinho() {
             const carrinhoDiv = document.getElementById("carrinhoLateral");
             carrinhoDiv.classList.toggle("aberto");
         }
-
         function atualizarNomeUsuario(nome) {
             const userNameElement = document.getElementById("userName");
             userNameElement.textContent = "Olá, " + nome + "!";
@@ -107,7 +101,7 @@
     <nav id="rodape_inicial">
         <p><?php echo $_SESSION['usuario'] ?></p>
         <button type="button" onclick="location.href='index.php?navegation=1&&tipo=todos'">Livros</button>
-        <button type="button" onclick="location.href='index.php?navegation=1&&tipo=seus'">Livros Alugados</button>
+        <button type="button" onclick="location.href='index.php?navegation=1&&tipo=seus'">Meus livros</button>
         <button type="button" onclick="location.href='src/controllers/deslogarUsuario.php'">Sair</button>
     </nav>
     <section id="livros" style="<?php echo ($_GET['tipo'] == 'todos') ? "display: block;" : "display:none"; ?>">
@@ -125,7 +119,7 @@
             <div class="alugueis-container" id="alugueisContainer">
                 <?php 
                     foreach ($dados as $meusLivros) {
-                        echo "<form method='POST' action='src/controllers/sacolaDeLivros.php'>";
+                        echo "<form method='POST' action='src/controllers/sacolaDeLivros.php' class='livro-card'>";
                         echo "<img src='view/livro/capas/'" . $meusLivros['nome_livro']."'>";
                         echo "<h3>".$meusLivros['nome_livro']."</h3>";
                         echo "<p>Alugado:" . $meusLivros['qtd_aluguel']."</p>";

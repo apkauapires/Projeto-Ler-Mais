@@ -35,7 +35,7 @@
     <form action = "listarAlugueisPorUsuario.php" method="post">
     <label for="nome"></label>
         <h1 class="cabeçalho">Alugueis</h1>
-      <input type="text" id="nome" name="nome" placeholder="Nome do usuário">
+     <input type="text" id="nome" name="nome" placeholder="Nome do usuário">
      <input type="submit" class="buscarAlu" value="Buscar">
     </form>    
         <table>
