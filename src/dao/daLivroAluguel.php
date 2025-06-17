@@ -67,10 +67,11 @@
     $alugueis = [];
 
     $stmt = $this->conexao->prepare("
-        SELECT usuario.nome_usuario, aluguel.data_coleta, aluguel.id_aluguel
-        FROM aluguel 
-        JOIN usuario ON aluguel.fk_id_usuario = usuario.id_usuario 
-        WHERE flg_ativo = 'S' AND usuario.nome_usuario LIKE '?'
+        SELECT usuario.nome_usuario, aluguel.data_coleta, aluguel.id_aluguel, livro.nome_livro, aluguel.qtd_aluguel, aluguel.data_coleta
+        FROM aluguel
+        JOIN usuario ON aluguel.fk_id_usuario = usuario.id_usuario
+        JOIN livro ON aluguel.fk_id_livro = livro.id_livro
+        WHERE flg_ativo != 'N' AND usuario.nome_usuario LIKE ?
     ");
 
     if ($stmt) {

@@ -51,12 +51,12 @@
                 </thead>
                 <tbody>
                 <br><br>
-                <?php foreach($alugueis as $a): ?>
+                <?php foreach($alugueis as $al): ?>
                 <tr>
-                    <td><?php echo $a['nome_usuario']; ?></td>
-                    <td><?php echo $a['data_coleta']; ?></td>
-                    <td><?php echo $a['nome_livro']; ?></td>
-                    <td><?php echo $a['qtd_aluguel']; ?></td>
+                    <td><?php echo $al['nome_usuario']; ?></td>
+                    <td><?php echo $al['data_coleta']; ?></td>
+                    <td><?php echo $al['nome_livro']; ?></td>
+                    <td><?php echo $al['qtd_aluguel']; ?></td>
                     <td>
                          <?php if($a->verificaStatus($al['id_aluguel'])=='P'){ ?>
                             <a href="../../controllers/efetivarAluguel.php?id_aluguel=<?= $al['id_aluguel'] ?>" 
