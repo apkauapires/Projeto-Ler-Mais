@@ -54,12 +54,4 @@ class Livro{
         }
 
     }
-   /* $t = new Livro(
-        "adsad",
-        "adsaa",
-        1,
-        3,
-    );
-    $test = $t->getCategoria();
-    echo $test;*/
 ?>

@@ -96,7 +96,7 @@
         FROM `aluguel` 
         INNER JOIN usuario ON usuario.id_usuario = aluguel.fk_id_usuario 
         INNER JOIN livro ON livro.id_livro = aluguel.fk_id_livro 
-        WHERE aluguel.flg_ativo = 'S' AND aluguel.fk_id_usuario = ? 
+        WHERE aluguel.flg_ativo <> 'N' AND aluguel.fk_id_usuario = ? 
         ORDER BY aluguel.id_aluguel;
     ");
 

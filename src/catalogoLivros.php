@@ -120,10 +120,10 @@
                 <?php 
                     foreach ($dados as $meusLivros) {
                         echo "<form method='POST' action='src/controllers/sacolaDeLivros.php' class='livro-card'>";
-                        echo "<img src='src/view/livro/capas/'" . $meusLivros['nome_livro']."'>";
+                        echo "<img src='src/view/livro/capas/" . $meusLivros['nome_livro'] . ".png'>";
                         echo "<h3>".$meusLivros['nome_livro']."</h3>";
                         echo "<p>Alugado:" . $meusLivros['qtd_aluguel']."</p>";
-                        echo "<p>Status:" . ($meusLivros['flg_ativo'] == "S") ? "Alugado</p>" : "Entregue</p>";
+                        echo "<p>Status:" . ($meusLivros['flg_ativo'] == "S") ? "Alugado" : "Pendente" . "</p>";
                         echo "</form>";
                     }
                 ?>
