@@ -13,12 +13,12 @@ if($nome || $quantidade){
     $doacaoDao = new daoDoacao($conexao);
     $doacaoDao->insert($doacao);
     $_SESSION['message'] = "Doação efetuada com SUCESSO, encaminhe o livro para o instituto correspondente";
-    header("Location: ../view/doacao/teste.php");
+    header("Location: ../view/doacao/form_doacao.php");
     exit;
 }
 $_SESSION['message'] = "ERRO, Preencha corretamente os dados!";
 
-header("Location: ../view/doacao/teste.php");
+header("Location: ../view/doacao/form_doacao.php");
 exit;
 
 

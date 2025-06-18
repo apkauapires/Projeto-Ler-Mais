@@ -1,70 +1,52 @@
+<?php
+session_start();
+
+
+$mensagem = '';
+if (isset($_SESSION['message'])) {
+    $mensagem = $_SESSION['message'];
+    unset($_SESSION['message']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Doação de Livro</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            padding: 20px;
-        }
-        .container {
-            background-color: white;
-            padding: 20px;
-            max-width: 400px;
-            margin: auto;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
-        h2 {
-            text-align: center;
-        }
-        label, input {
-            display: block;
-            width: 100%;
-        }
-        input[type="text"] {
-            padding: 8px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .buttons {
-            display: flex;
-            justify-content: space-between;
-        }
-        button {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            color: white;
-        }
-        .btn-inserir {
-            background-color: #4CAF50;
-        }
-        .btn-cadastrar {
-            background-color: #2196F3;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LerMais</title>
+    <link rel="stylesheet" href="../../components/style-cadastroDoacao.css">
 </head>
 <body>
-
-    <div class="container">
-        <h2>Doação de Livro</h2>
-
-        <form method="post" action="listaLivroDoacao.php">
-            <label for="nomeLivro">Nome do Livro:</label>
-            <input type="text" id="nomeLivro" name="nomeLivro" placeholder="Digite o nome do livro" required>
-
-            <div class="buttons">
-                <button type="submit" class="btn-inserir" formaction="listaLivroDoacao.php">Inserir Livro Existente</button>
-                <button type="button" class="btn-cadastrar" onclick="window.location.href='cadastro_livro.php'">Cadastrar Novo Livro</button>
+        <div class="card">
+        <div class="title"><h1>Doe seu livro!</h1></div>
+        <div class="subtitle"><h2>Ajude a sua comunidade doando livros que você já terminou!</h2>
+        <h2>Todos tem direito a leitura!</h2></div>
+        <?= $mensagem ?>
+        <div class="container">
+        <form action="../../controllers/inserirDoacao.php" method = "POST">
+            
+            <div class="primeira_linha">
+            <label>Titulo:
+            <input type="text" placeholder="Digite aqui o titulo do livro..."id="nome_livro" name="nome_livro" required>
+            </label>
+            <label>Autor: 
+                <input type="text" placeholder="Autor..." id="autor_livro" name="autor_livro" required>
+            </label>
+            </div>
+            <div class="segunda_linha">
+            <label>Quantidade: 
+                <input type="number" placeholder="Quantidade doada..." min="1" id="qtd_doacao" name="qtd_doacao" required>
+            </label>
+            <label>Descrição: 
+                <input type="text" placeholder="Descrição..." id="descricao" name="descricao" required>
+            </label>
+            </div>
+            </div>
+            <div class="div_button">
+            <button type="submit">Doe seu livro</button>
             </div>
         </form>
     </div>
-
 </body>
 </html>
