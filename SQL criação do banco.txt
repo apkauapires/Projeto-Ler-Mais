@@ -48,9 +48,12 @@ CREATE TABLE Aluguel (
 
 --5. Doaçao
 CREATE TABLE Doacao (
-    id_livro INT PRIMARY KEY AUTO_INCREMENT,
+    id_doacao INT PRIMARY KEY AUTO_INCREMENT,
+    fk_id_usuario INT NOT NULL,
     nome_livro VARCHAR(100) NOT NULL,
     autor_livro VARCHAR(100) NOT NULL,
     qtd_doacao INT NOT NULL,
-    descricao LONGTEXT NOT NULL
+    descricao LONGTEXT,
+    flg_status VARCHAR(2),
+    FOREIGN KEY (fk_id_usuario) REFERENCES Usuario(id_usuario)
 );

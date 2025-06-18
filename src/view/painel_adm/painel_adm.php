@@ -12,7 +12,7 @@
         <a href="index.php?navegation=2" class="botao">Cadastro de Categoria</a>
         <a href="index.php?navegation=3" class="botao">Cadastro de Livro</a>
         <a href="index.php?navegation=4" class="botao">Listagem de Aluguéis</a>
-        <a href="index.php?navegation=5" class="botao">Doações</a>
+        <a href="/src/view/doacao/listarDoacoes.php" class="botao">Doações</a>
         <br>
         <a href="src/controllers/deslogarUsuario.php" class="botao">Sair</a>
 
