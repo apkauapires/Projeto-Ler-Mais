@@ -43,7 +43,7 @@
                     <td><?php echo $do['nome_livro']; ?></td>
                     <td><?php echo $do['autor_livro']; ?></td>
                     <td><?php echo $do['qtd_doacao']; ?></td>
-                    <td><p class="baixarAlu">Receber</p></td>
+                    <td><a href = "painel_doacao.php?id=<?php echo $do['id_doacao']?>" class="baixarAlu">Receber</a></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

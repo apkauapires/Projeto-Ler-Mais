@@ -47,6 +47,24 @@
             return $livro;
         }
 
+        public function buscarLivroPorNome($n) {
+        $livros = [];
+        $sql = "SELECT * FROM livro WHERE nome_livro LIKE ?";
+        $stmt = $this->conexao->prepare($sql);
+        
+
+        $nome = "%" . $n . "%";
+        $stmt->bind_param("s", $nome);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        while ($l = $resultado->fetch_assoc()) {
+            $livros[] = $l;
+        }
+        
+        $stmt->close();
+        return $livros;
+}
+
         public function saidaEstoque($qtd,$id){
             $stmt = $this->conexao->prepare("UPDATE livro SET estoque_livro = estoque_livro - ? WHERE id_livro = ?");
             $stmt->bind_param('ii', $qtd, $id);

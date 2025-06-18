@@ -55,13 +55,15 @@
     <div class="container">
         <h2>Doação de Livro</h2>
 
-        <label for="nomeLivro">Nome do Livro:</label>
-        <input type="text" id="nomeLivro" name="nomeLivro" placeholder="Digite o nome do livro">
+        <form method="post" action="listaLivroDoacao.php">
+            <label for="nomeLivro">Nome do Livro:</label>
+            <input type="text" id="nomeLivro" name="nomeLivro" placeholder="Digite o nome do livro" required>
 
-        <div class="buttons">
-            <button class="btn-inserir">Inserir Livro Existente</button>
-            <button class="btn-cadastrar" onclick="window.location.href='cadastro_livro.php'">Cadastrar Novo Livro</button>
-        </div>
+            <div class="buttons">
+                <button type="submit" class="btn-inserir" formaction="listaLivroDoacao.php">Inserir Livro Existente</button>
+                <button type="button" class="btn-cadastrar" onclick="window.location.href='cadastro_livro.php'">Cadastrar Novo Livro</button>
+            </div>
+        </form>
     </div>
 
 </body>
