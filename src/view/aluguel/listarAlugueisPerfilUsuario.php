@@ -28,7 +28,7 @@
 </head>
 <body>
     <div>
-        <a href="/Projeto-Ler-Mais/index.php?navegation=1" class="sair_button">
+        <a href="../../../index.php?navegation=1" class="sair_button">
         Voltar
         </a>
         <table>

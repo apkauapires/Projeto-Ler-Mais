@@ -10,7 +10,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../components/style-listarAlugueis.css">
     <title>Doaçoes</title>
 </head>
 <body>
@@ -40,7 +39,7 @@
                     <td><?php echo $li['estoque_livro']; ?></td>
                     <td>
                         <a 
-                        href="../../controllers/receberDoacao.php?id_doacao=<?= $_POST['id_doacao'] ?>&id_livro=<?= $li['id_livro'] ?>&qtd_doacao=<?= $_POST['qtd_doacao'] ?>" 
+                        href="src/controllers/receberDoacao.php?id_doacao=<?= $_POST['id_doacao'] ?>&id_livro=<?= $li['id_livro'] ?>&qtd_doacao=<?= $_POST['qtd_doacao'] ?>" 
                         class="baixarAlu" 
                         onclick="return confirm('Tem certeza que deseja receber esta doação?');"
                                 >

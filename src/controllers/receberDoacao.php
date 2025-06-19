@@ -14,12 +14,12 @@ if($id_doacao || $idLivro || $qtd){
     $daoDoacao->baixarDoacao($id_doacao);
     $daoLivro->entradaEstoque($qtd,$idLivro);
     $_SESSION['message'] = "Livro recebido com SUCESSO!";
-    header("Location: ../view/doacao/listarDoacoes.php");
+    header("Location: ../../index.php?navegation=6");
     exit;
 }
 
 $_SESSION['message'] = "Ocorreu um erro!";
-header("Location: ../view/doacao/listarDoacoes.php");
+header("Location: ../../index.php?navegation=6");
 
 
 

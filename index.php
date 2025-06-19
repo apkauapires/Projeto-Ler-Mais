@@ -31,9 +31,12 @@
                  echo "<link rel='stylesheet' href='src/components/style-cadastroCategoria.css'>";
             }elseif($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 3){
                 echo "<link rel='stylesheet' href='src/components/style-cadastroLivro.css'>";
-            }elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 4 || $_GET['navegation'] == 6){
+            }elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 4 || $_GET['navegation'] == 6 || $_GET['navegation'] == 8){
                  echo "<link rel='stylesheet' href='src/components/style-listarAlugueis.css'>";
-            }else{
+            }elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 7){
+                 echo "<link rel='stylesheet' href='src/components/style-painelDoacao.css'>";
+            }
+            else{
                  echo "<link rel='stylesheet' href='src/components/style-catalogoLivros.css'>";
                  
             }
@@ -62,12 +65,16 @@
         }
         elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 3) {
             include 'src/view/livro/form_livro.php';
-        }
-        elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 4) {
+        }elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 4) {
             include 'src/view/aluguel/listarAlugueis.php';
         }elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 6) {
              include 'src/view/doacao/listarDoacoes.php';
-        }else{
+        }elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 7) {
+             include 'src/view/doacao/painel_doacao.php';
+        }elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 8) {
+             include 'src/view/doacao/listaLivroDoacao.php';
+        }
+        else{
             include 'src/catalogoLivros.php';
         }
         ?>

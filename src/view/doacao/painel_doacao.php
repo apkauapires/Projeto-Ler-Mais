@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Efetivar Doação</title>
-  <link rel="stylesheet" href="../../components/style-painelDoacao.css">
+  
 </head>
 <body>
   <div class="container">
@@ -19,7 +19,7 @@
         <input type="hidden" name="id_doacao" value="<?= $_GET['id_doacao'] ?>">
         <input type="hidden" name="qtd_doacao" value="<?= $_GET['qtd_doacao'] ?>">
         <div class="buttons">
-          <button type="submit" class="btn-inserir" formaction="listaLivroDoacao.php" >Inserir Livro Existente</button>
+          <button type="submit" class="btn-inserir" formaction="index.php?navegation=8" >Inserir Livro Existente</button>
           <button type="button" class="btn-cadastrar" href="../livro/form_livro.php">Cadastrar Novo Livro</button>
         </div>
       </form>

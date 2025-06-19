@@ -20,7 +20,7 @@
     </a>
     <div>
         
-        <form action = "listarDoacoesPorUsuario.php" method="post">
+        <form action = "src/view/doacao/listarDoacoesPorUsuario.php" method="post">
             <label for="nome"></label>
             <h1 class="cabeçalho">Doaçoes</h1>
             
@@ -51,7 +51,7 @@
                     <td><?php echo $do['qtd_doacao']; ?></td>
                     <td>
                         <a 
-                        href="painel_doacao.php?id_doacao=<?= $do['id_doacao'] ?>&qtd_doacao=<?= $do['qtd_doacao'] ?>" 
+                        href="index.php?navegation=7&&id_doacao=<?= $do['id_doacao']?>&&qtd_doacao=<?= $do['qtd_doacao'] ?>" 
                         class="baixarAlu" 
                         onclick="return confirm('Tem certeza que deseja receber esta doação?');"
                                 >

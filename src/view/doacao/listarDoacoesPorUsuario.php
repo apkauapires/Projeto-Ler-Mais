@@ -14,10 +14,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../components/style-listarAlugueis.css">
-    <title>Doaçoes</title>
+    <title>LerMais</title>
+    <style>
+            .sair_button{
+                margin-left: 60px;
+                position: absolute;
+                padding: 15px 25px;
+                background: white;
+                color: blue;
+                font-size: 20px;
+                text-decoration: none;
+                border-radius: 15px;
+            }
+        </style>
 </head>
 <body>
-    <a href="index.php?navegation=1" class="sair_button">
+    <a href="../../../index.php?navegation=1" class="sair_button">
         Voltar
     </a>
     <div>
