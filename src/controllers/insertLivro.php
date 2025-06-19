@@ -24,7 +24,7 @@ $nomeImagemSemExtensao = normalizarTitulo($nome);
 $extensaoImagem = pathinfo($nomeImagemOriginal, PATHINFO_EXTENSION);
 
 $nomeImagemFinal = $nomeImagemSemExtensao . "." . $extensaoImagem;
-$caminhoImagem = "../view/livro/capas/" . $nomeImagemFinal;
+$caminhoImagem = "src/view/livro/capas/" . $nomeImagemFinal;
 
 if (!$nome || !$autor || !$estoque || !$descricao || !$nomeImagemOriginal) {
     header("Location:../../index.php?navegation=3");
