@@ -93,7 +93,7 @@
     $alugueis = [];
 
     $stmt = $this->conexao->prepare("
-        SELECT aluguel.id_aluguel, livro.nome_livro, aluguel.qtd_aluguel, aluguel.flg_ativo
+        SELECT aluguel.id_aluguel, livro.nome_livro, aluguel.qtd_aluguel, aluguel.flg_ativo, livro.capa_livro
         FROM `aluguel` 
         INNER JOIN usuario ON usuario.id_usuario = aluguel.fk_id_usuario 
         INNER JOIN livro ON livro.id_livro = aluguel.fk_id_livro 

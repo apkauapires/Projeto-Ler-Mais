@@ -23,19 +23,21 @@
             session_start();
              if($_SESSION['usuario']===null){
                  echo "<link rel='stylesheet' type='text/css' href='src/components/style-loginUsuario.css'>";
-             }elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 1) {
-                 echo "<link rel='stylesheet' href='src/components/style-painelAdm.css'>";
-            }elseif (isset($_SESSION['email']) && $_GET['navegation'] == 1) {
-                 echo "<link rel='stylesheet' href='src/components/style-catalogoLivros.css'>";
-            }elseif (isset($_SESSION['email']) && $_GET['navegation'] == 2){
-                 echo "<link rel='stylesheet' href='src/components/style-cadastroCategoria.css'>";
-            }elseif(isset($_SESSION['email']) && $_GET['navegation'] == 3){
-                echo "<link rel='stylesheet' href='src/components/style-cadastroLivro.css'>";
-            }elseif (isset($_SESSION['email']) && $_GET['navegation'] == 4){
-                 echo "<link rel='stylesheet' href='src/components/style-listarAlugueis.css'>";
-            }elseif ($_SESSION['usuario']===null && $_GET['navegation'] == 5){
+             }elseif ($_SESSION['usuario']===null && $_GET['navegation'] == 5){
                 echo "<link rel='stylesheet' href='src/components/style-cadastroUsuario.css'>";
+            }elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 1) {
+                 echo "<link rel='stylesheet' href='src/components/style-painelAdm.css'>";
+            }elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 2){
+                 echo "<link rel='stylesheet' href='src/components/style-cadastroCategoria.css'>";
+            }elseif($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 3){
+                echo "<link rel='stylesheet' href='src/components/style-cadastroLivro.css'>";
+            }elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 4 || $_GET['navegation'] == 6){
+                 echo "<link rel='stylesheet' href='src/components/style-listarAlugueis.css'>";
+            }else{
+                 echo "<link rel='stylesheet' href='src/components/style-catalogoLivros.css'>";
+                 
             }
+            
         
         ?>
         <title>LerMais</title>
@@ -54,17 +56,19 @@
 
         if($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 1){
             include 'src/view/painel_adm/painel_adm.php';
-        }elseif(isset($_SESSION['email']) && $_GET['navegation'] == 1){
-            include 'src/catalogoLivros.php';
         }
-        elseif (isset($_SESSION['email']) && $_GET['navegation'] == 2) {
+        elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 2) {
             include 'src/view/categoria/form_categoria.php';
         }
-        elseif (isset($_SESSION['email']) && $_GET['navegation'] == 3) {
+        elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 3) {
             include 'src/view/livro/form_livro.php';
         }
-        elseif (isset($_SESSION['email']) && $_GET['navegation'] == 4) {
+        elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 4) {
             include 'src/view/aluguel/listarAlugueis.php';
+        }elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 6) {
+             include 'src/view/doacao/listarDoacoes.php';
+        }else{
+            include 'src/catalogoLivros.php';
         }
         ?>
         

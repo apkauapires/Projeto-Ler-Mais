@@ -23,7 +23,7 @@
         }
 
         public function listarLivros() {
-            $sql = "SELECT livro.*, categoria.nome_categoria FROM livro
+            $sql = "SELECT livro.id_livro, livro.autor_livro, livro.nome_livro, livro.estoque_livro, categoria.nome_categoria, livro.capa_livro FROM livro
             JOIN 
             categoria ON livro.fk_id_categoria = categoria.id_categoria WHERE livro.estoque_livro > 0
             ORDER BY 

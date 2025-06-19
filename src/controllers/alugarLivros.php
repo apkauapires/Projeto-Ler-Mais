@@ -22,7 +22,7 @@
         $daoLivro = new DaoLivro($conexao);
 
         if (!$fk_id_usuario || !$fk_id_livro || !$data_coleta) {
-            header("Location: ../view/categoria/form_livro.php?error=missing_data");
+            header("Location: ../../index.php?navegation=1&&verificacao=sim&&tipo=todos&&error=missing_data");
             exit();
         }else{
             for ($i=0; $i < $qtdSacola ; $i++) { 

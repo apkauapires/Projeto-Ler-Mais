@@ -17,28 +17,18 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>LerMais - Biblioteca Comunitária</title>
     <?php
         if($_GET['tipo'] == 'todos'){
     ?>
         <script>
             const livros = <?php echo json_encode($dados); ?>;
-            function normalizarTitulo(titulo) {
-                return titulo
-                    .normalize('NFD')
-                    .replace(/[\u0300-\u036f]/g, '')
-                    .toLowerCase()
-                    .replace(/[^a-z0-9]/g, '_');
-            }
             function criarCardLivro(livro) {
                 const card = document.createElement('form');
                 card.method = 'POST';
                 card.action = 'src/controllers/sacolaDeLivros.php';
                 card.classList.add('livro-card');
-                const nomeImagem = normalizarTitulo(livro.nome_livro) + '.png';
                 card.innerHTML = `
-                    <img src="src/view/livro/capas/${nomeImagem}" alt="${livro.nome_livro}" onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';"> 
-                    <input type="hidden" name='img' value="${nomeImagem}">
+                    <img src="${livro.capa_livro}" alt="${livro.nome_livro}" onerror="this.onerror=null; this.src='imagens/imagem_padrao.png';"> 
                     <h3>${livro.nome_livro}</h3>
                     <input type="hidden" name="titulo" value="${livro.nome_livro}">
                     <p>Autor: ${livro.autor_livro}</p>
@@ -92,7 +82,13 @@
         <script>
             window.addEventListener('load', toggleCarrinho);
         </script>
-    <?php } ?>
+    <?php } 
+        if($_GET['navegation'] == 1 && $_GET['tipo'] == 'doacao'){
+                     echo "<link rel='stylesheet' href='src/components/style-cadastroDoacao.css'>";
+                 }
+    ?>
+
+
 </head>
 <body>
     <header>
@@ -102,6 +98,7 @@
         <p><?php echo $_SESSION['usuario'] ?></p>
         <button type="button" onclick="location.href='index.php?navegation=1&&tipo=todos'">Livros</button>
         <button type="button" onclick="location.href='index.php?navegation=1&&tipo=seus'">Meus livros</button>
+        <button type="button" onclick="location.href='index.php?navegation=1&&tipo=doacao'">Doações</button>
         <button type="button" onclick="location.href='src/controllers/deslogarUsuario.php'">Sair</button>
     </nav>
     <section id="livros" style="<?php echo ($_GET['tipo'] == 'todos') ? "display: block;" : "display:none"; ?>">
@@ -120,7 +117,7 @@
                 <?php 
                     foreach ($dados as $meusLivros) {
                         echo "<form method='POST' action='src/controllers/sacolaDeLivros.php' class='livro-card'>";
-                        echo "<img src='src/view/livro/capas/" . $meusLivros['nome_livro'] . ".png'>";
+                        echo "<img src='" . $meusLivros['capa_livro'] . "'>";
                         echo "<h3>".$meusLivros['nome_livro']."</h3>";
                         echo "<p>Alugado:" . $meusLivros['qtd_aluguel']."</p>";
                         echo "<p>Status:" . ($meusLivros['flg_ativo'] == "S") ? "Alugado" : "Pendente" . "</p>";
@@ -128,6 +125,11 @@
                     }
                 ?>
             </div>
+    </section>
+    <section style="<?php echo ($_GET['tipo'] == 'doacao') ? "display: block;" : "display:none"; ?>">
+            <?php
+                include __DIR__ . "/view/doacao/form_doacao.php";
+            ?>
     </section>
     <button id="abrirCarrinho" onclick="<?php echo (!empty($sacola)) ? "toggleCarrinho()" : ""; ?>">🛒</button>
     <form id="carrinhoLateral" method="POST" action="src/controllers/alugarLivros.php">
