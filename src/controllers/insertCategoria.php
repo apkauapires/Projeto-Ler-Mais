@@ -11,9 +11,9 @@ $nome = $_POST['nome_categoria'];
 $categoriaDao = new daoCategoria($conexao);
 
 if(!$nome){
-    header("Location: ../view/categoria/form_categoria.php");   
+    header("Location: ../../index.php?navegation=2");   
 }else{
     $categoria = new Categoria($nome);
     $categoriaDao->insert($categoria);
-    header("Location: ../view/painel_adm/painel_adm.php"); 
+    header("Location: ../../index.php?navegation=2"); 
 }
