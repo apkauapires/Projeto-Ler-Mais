@@ -38,6 +38,7 @@
                 `;
                 return card;
             }
+            console.log(livros);
             function exibirLivros(lista = livros) {
                 const container = document.getElementById("livrosContainer");
                 container.innerHTML = "";

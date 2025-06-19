@@ -22,17 +22,17 @@ if($email && $senha){
             exit;
         }else{
             $_SESSION['message'] = 'E-mail ou senha inválidos!';
-            header('Location:../../index.php?navegation=1');
+            header('Location:../../index.php');
             exit;
         }
     }else{
             $_SESSION['message'] = 'Email não encontrado!';
-            header('Location:../../index.php?navegation=1');
+            header('Location:../../index.php');
             exit;
     }
 }else{
     $_SESSION['message'] = 'Informe os dados!';
-    header('Location:../../index.php?navegation=1');
+    header('Location:../../index.php');
     exit;
 }
 
