@@ -20,7 +20,7 @@
         <input type="hidden" name="qtd_doacao" value="<?= $_GET['qtd_doacao'] ?>">
         <div class="buttons">
           <button type="submit" class="btn-inserir" formaction="index.php?navegation=8" >Inserir Livro Existente</button>
-          <button type="button" class="btn-cadastrar" href="index.php?navegation=3">Cadastrar Novo Livro</button>
+          <button type="button" class="btn-cadastrar" onclick="location.href='index.php?navegation=3'">Cadastrar Novo Livro</button>
         </div>
       </form>
       
