@@ -3,7 +3,8 @@
     require __DIR__ . "../../../dao/daoDoacao.php";
 
     $d = new daoDoacao($conexao);
-    $doacoes = $d->listarDoacoes();
+    $nome = $_POST['nome'] ?? '';
+    $doacoes = $d->listarDoacoesPorUsuario($nome);
 
 ?>
 
@@ -25,7 +26,7 @@
             <label for="nome"></label>
             <h1 class="cabeçalho">Doaçoes</h1>
             
-            <input type="text" id="nome_usuario" name="nome_usuario" placeholder="Nome do usuário">
+            <input type="text" id="nome" name="nome" placeholder="Nome do usuário">
             <input type="submit" class="buscarAlu" value="Buscar">
             <p><?php if(isset($_SESSION['message'])){
             echo $_SESSION['message'];

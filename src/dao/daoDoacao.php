@@ -31,7 +31,7 @@ class daoDoacao{
                         d.descricao
                         FROM Doacao d
                         JOIN Usuario u ON d.fk_id_usuario = u.id_usuario
-                        WHERE flg_status = 'P'; ";
+                        WHERE flg_status = 'P';";
             $resultado = mysqli_query($this->conexao, $sql);
             $doacoes = [];
             while ($doacao = mysqli_fetch_assoc($resultado)) {
@@ -39,6 +39,41 @@ class daoDoacao{
             }
             return $doacoes;
         }   
+
+
+        public function listarDoacoesPorUsuario($nome) {
+        $sql = "SELECT 
+                d.id_doacao,
+                u.nome_usuario AS usuario,
+                d.nome_livro,
+                d.autor_livro,
+                d.qtd_doacao,
+                d.descricao
+            FROM Doacao d
+            JOIN Usuario u ON d.fk_id_usuario = u.id_usuario
+            WHERE d.flg_status = 'P' AND u.nome_usuario LIKE ?";
+    
+        $stmt = $this->conexao->prepare($sql);
+        $param = '%' . $nome . '%';
+        $stmt->bind_param('s', $param);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        $doacoes = [];
+        while ($doacao = $resultado->fetch_assoc()) {
+        $doacoes[] = $doacao;
+    }
+    
+    $stmt->close();
+    return $doacoes;
+}
+
+        public function baixarDoacao($i){
+            $stmt = $this->conexao->prepare("UPDATE doacao SET flg_status = 'N' where id_doacao = ?");
+            $stmt->bind_param('i', $i);
+            $stmt->execute(); 
+            $stmt->close();
+        }
 
 
 }
