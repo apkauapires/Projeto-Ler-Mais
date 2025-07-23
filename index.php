@@ -35,8 +35,7 @@
                  echo "<link rel='stylesheet' href='src/components/style-listarAlugueis.css'>";
             }elseif ($_SESSION['email']==="admin@sistema" && $_GET['navegation'] == 7){
                  echo "<link rel='stylesheet' href='src/components/style-painelDoacao.css'>";
-            }
-            else{
+            }else{
                  echo "<link rel='stylesheet' href='src/components/style-catalogoLivros.css'>";
                  
             }
