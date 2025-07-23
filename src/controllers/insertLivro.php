@@ -25,13 +25,14 @@ $extensaoImagem = pathinfo($nomeImagemOriginal, PATHINFO_EXTENSION);
 
 $nomeImagemFinal = $nomeImagemSemExtensao . "." . $extensaoImagem;
 $caminhoImagem = "src/view/livro/capas/" . $nomeImagemFinal;
+$caminhoUpload = "../view/livro/capas/" . $nomeImagemFinal;
 
 if (!$nome || !$autor || !$estoque || !$descricao || !$nomeImagemOriginal) {
     header("Location:../../index.php?navegation=3");
     exit;
 }
 
-move_uploaded_file($tmpImagem, $caminhoImagem);
+move_uploaded_file($tmpImagem, $caminhoUpload);
 
 $livro = new Livro($nome, $autor, $categoria, $estoque, $caminhoImagem, $descricao);
 

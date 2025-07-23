@@ -28,7 +28,6 @@
             <thead>
                 <tr>
                 <th width="220" class="tnomeUsuario">Nome do usuario</th>
-                <th width="220" class="tdata">Data aluguel</th>
                 <th width="220" class="tdata">Livro Alugado</th>
                 <th width="220" class="tdata">Quantidade Alugada</th>
                 <th width="220">Status</th>
@@ -39,7 +38,6 @@
                 <?php foreach($alugueis as $al): ?>
                 <tr>
                     <td><?php echo $al['nome_usuario']; ?></td>
-                    <td><?php echo $al['data_coleta']; ?></td>
                     <td><?php echo $al['nome_livro']; ?></td>
                     <td><?php echo $al['qtd_aluguel']; ?></td>
                     
